@@ -8,6 +8,10 @@
 import Foundation
 
 protocol TupleProtocol: Equatable {
+    init(x: Double, y: Double, z: Double, w: Double)
+    
+    var length: Double {get}
+    
     var x: Double {get set}
     var y: Double {get set}
     var z: Double {get set}
@@ -20,32 +24,33 @@ extension TupleProtocol {
             return (x*x + y*y + z*z + w*w).squareRoot()
         }
     }
-    
-    static func == (lhs: Self, rhs: Self) -> Bool {
-        return (lhs.x == rhs.x) && (lhs.y == rhs.y) && (lhs.z == rhs.z) && (lhs.w == rhs.w)
-    }
-    
-    static func + (lhs: Self, rhs: Self) -> Tuple {
-        return Tuple(x: lhs.x+rhs.x, y: lhs.y+rhs.y, z: lhs.z+rhs.z, w: lhs.w+rhs.w)
-    }
-    
-    static func - (lhs: Self, rhs: Self) -> Tuple {
-        return Tuple(x: lhs.x-rhs.x, y: lhs.y-rhs.y, z: lhs.z-rhs.z, w: lhs.w-rhs.w)
-    }
-    
-    static func * (lhs: Self, rhs: Double) -> Tuple {
-        return Tuple(x: lhs.x*rhs, y: lhs.y*rhs, z: lhs.z*rhs, w: lhs.w*rhs)
-    }
-    
-    static func * (lhs: Double, rhs: Self) -> Tuple {
-        return Tuple(x: lhs*rhs.x, y: lhs*rhs.y, z: lhs*rhs.z, w: lhs*rhs.w)
-    }
-    
-    static func / (lhs: Self, rhs: Double) -> Tuple {
-        return Tuple(x: lhs.x/rhs, y: lhs.y/rhs, z: lhs.z/rhs, w: lhs.w/rhs)
-    }
-    
-    static prefix func - (op: Self) -> Tuple {
-        return Tuple(x: -op.x, y: -op.y, z: -op.z, w: -op.w)
-    }
 }
+
+func ==<T: TupleProtocol> (lhs: T, rhs: T) -> Bool {
+    return (lhs.x == rhs.x) && (lhs.y == rhs.y) && (lhs.z == rhs.z) && (lhs.w == rhs.w)
+}
+
+func +<T: TupleProtocol> (lhs: T, rhs: T) -> T {
+    return T(x: lhs.x+rhs.x, y: lhs.y+rhs.y, z: lhs.z+rhs.z, w: lhs.w+rhs.w)
+}
+
+func -<T: TupleProtocol> (lhs: T, rhs: T) -> T {
+    return T(x: lhs.x-rhs.x, y: lhs.y-rhs.y, z: lhs.z-rhs.z, w: lhs.w-rhs.w)
+}
+
+func *<T: TupleProtocol> (lhs: T, rhs: Double) -> T {
+    return T(x: lhs.x*rhs, y: lhs.y*rhs, z: lhs.z*rhs, w: lhs.w*rhs)
+}
+
+func *<T: TupleProtocol> (lhs: Double, rhs: T) -> T {
+    return T(x: lhs*rhs.x, y: lhs*rhs.y, z: lhs*rhs.z, w: lhs*rhs.w)
+}
+
+func /<T: TupleProtocol> (lhs: T, rhs: Double) -> T {
+    return T(x: lhs.x/rhs, y: lhs.y/rhs, z: lhs.z/rhs, w: lhs.w/rhs)
+}
+
+prefix func -<T: TupleProtocol> (op: T) -> T {
+    return T(x: -op.x, y: -op.y, z: -op.z, w: -op.w)
+}
+
