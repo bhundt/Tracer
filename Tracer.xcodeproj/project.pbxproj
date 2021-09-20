@@ -17,6 +17,9 @@
 		2163F4B026F8AD2600C5B4A9 /* CanvasTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2163F4AF26F8AD2600C5B4A9 /* CanvasTest.swift */; };
 		2163F4B326F8AE2B00C5B4A9 /* Canvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2163F4B226F8AE2B00C5B4A9 /* Canvas.swift */; };
 		2163F4B426F8AE2B00C5B4A9 /* Canvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2163F4B226F8AE2B00C5B4A9 /* Canvas.swift */; };
+		2163F4B626F8EA7700C5B4A9 /* MatrixTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2163F4B526F8EA7700C5B4A9 /* MatrixTest.swift */; };
+		2163F4B826F8EB7500C5B4A9 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2163F4B726F8EB7500C5B4A9 /* Matrix.swift */; };
+		2163F4B926F8EB7500C5B4A9 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2163F4B726F8EB7500C5B4A9 /* Matrix.swift */; };
 		21F47DFB26F7D5F60033DA0E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F47DFA26F7D5F60033DA0E /* main.swift */; };
 		21F47E0826F7D7AD0033DA0E /* TupleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F47E0726F7D7AD0033DA0E /* TupleTest.swift */; };
 		21F47E0E26F7D94F0033DA0E /* Tuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F47E0D26F7D94F0033DA0E /* Tuple.swift */; };
@@ -41,6 +44,8 @@
 		2163F4AD26F8A17A00C5B4A9 /* ColorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTest.swift; sourceTree = "<group>"; };
 		2163F4AF26F8AD2600C5B4A9 /* CanvasTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CanvasTest.swift; path = test/CanvasTest.swift; sourceTree = SOURCE_ROOT; };
 		2163F4B226F8AE2B00C5B4A9 /* Canvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Canvas.swift; sourceTree = "<group>"; };
+		2163F4B526F8EA7700C5B4A9 /* MatrixTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixTest.swift; sourceTree = "<group>"; };
+		2163F4B726F8EB7500C5B4A9 /* Matrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix.swift; sourceTree = "<group>"; };
 		21F47DF726F7D5F60033DA0E /* Tracer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Tracer; sourceTree = BUILT_PRODUCTS_DIR; };
 		21F47DFA26F7D5F60033DA0E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		21F47E0526F7D7AD0033DA0E /* TracerTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TracerTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,6 +78,7 @@
 				21F47E0D26F7D94F0033DA0E /* Tuple.swift */,
 				2163F4A726F89BFC00C5B4A9 /* Color.swift */,
 				2163F4AA26F8A02600C5B4A9 /* TupleProtocol.swift */,
+				2163F4B726F8EB7500C5B4A9 /* Matrix.swift */,
 			);
 			path = helper;
 			sourceTree = "<group>";
@@ -129,6 +135,7 @@
 				21F47E0726F7D7AD0033DA0E /* TupleTest.swift */,
 				2163F4AD26F8A17A00C5B4A9 /* ColorTest.swift */,
 				21F47E0926F7D7AD0033DA0E /* Info.plist */,
+				2163F4B526F8EA7700C5B4A9 /* MatrixTest.swift */,
 			);
 			path = test;
 			sourceTree = "<group>";
@@ -221,6 +228,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2163F4B826F8EB7500C5B4A9 /* Matrix.swift in Sources */,
 				2163F4AB26F8A02600C5B4A9 /* TupleProtocol.swift in Sources */,
 				21F47E0E26F7D94F0033DA0E /* Tuple.swift in Sources */,
 				2163F4A826F89BFC00C5B4A9 /* Color.swift in Sources */,
@@ -234,7 +242,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2163F4B626F8EA7700C5B4A9 /* MatrixTest.swift in Sources */,
 				2163F4B426F8AE2B00C5B4A9 /* Canvas.swift in Sources */,
+				2163F4B926F8EB7500C5B4A9 /* Matrix.swift in Sources */,
 				2163F4AE26F8A17A00C5B4A9 /* ColorTest.swift in Sources */,
 				214437CA26F87B9800925AA1 /* Tuple.swift in Sources */,
 				21F47E0826F7D7AD0033DA0E /* TupleTest.swift in Sources */,
