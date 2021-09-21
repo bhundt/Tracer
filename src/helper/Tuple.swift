@@ -28,7 +28,6 @@ struct Tuple: TupleProtocol {
         return w == 0.0
     }
     
-    
     func getNormalized() -> Tuple {
         let l = length
         assert(l > 0.0)
