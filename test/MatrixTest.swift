@@ -164,6 +164,7 @@ class MatrixTest: XCTestCase {
         XCTAssert(M.transposed == R)
     }
     
+    // p. 33
     func testTransposedIdentity() throws {
         let M = Matrix.makeIdentity(size: 4)
         XCTAssert(M.transposed == M)
