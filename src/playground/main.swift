@@ -42,7 +42,7 @@ func chapTwoPlayground() {
     do {
         try ppm.write(to: path, atomically: false, encoding: .utf8)
     }
-    catch {/* error handling here */}
+    catch {}
 }
 
 chapTwoPlayground()
