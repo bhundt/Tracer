@@ -7,7 +7,7 @@
 
 import XCTest
 
-class MatrixTest: XCTestCase {
+class MatrixArithmeticTest: XCTestCase {
 
     // p. 26
     func testMatrixComponents() throws {

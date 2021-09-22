@@ -45,4 +45,25 @@ func chapTwoPlayground() {
     catch {}
 }
 
-chapTwoPlayground()
+// p. 55
+func chapThreePlayground() {
+    let canvas = Canvas(width: 200, height: 200)
+    
+    let center = Tuple.makePoint(x: 75, y: 0, z: 0)
+    let clockPositions: [Double] = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map { $0 * Double.pi/180  }
+    
+    for angle in clockPositions {
+        let drawPix = (Matrix.makeIdentity(size: 4).rotateZ(radians: angle)) * center
+        canvas[Int(drawPix.x.rounded())+100, canvas.height - Int(drawPix.y.rounded()) - 100] = Color(red: 1, green: 1, blue: 1)
+    }
+    
+    let ppm = canvas.toPortablePixMap()
+    do {
+        let path = FileManager.default.urls(for: .documentDirectory,
+                                            in: .userDomainMask)[0].appendingPathComponent("clock.ppm")
+        try ppm.write(to: path, atomically: false, encoding: .utf8)
+    }
+    catch {}
+}
+
+chapThreePlayground()
