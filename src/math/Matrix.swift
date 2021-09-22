@@ -7,6 +7,8 @@
 
 import Foundation
 
+infix operator !~=
+
 struct Matrix {
     var m: [[Double]] = []
     var rows: Int {get{return _rows}}
@@ -153,11 +155,76 @@ struct Matrix {
     /// - Parameter size: The number of rows / columns
     /// - Returns: The identity matrix
     static func makeIdentity(size: Int) -> Matrix {
-        var M = Matrix(rows: size, columns: size)
+        var M = Matrix(size: size)
         for n in 0..<size {
             M[n, n] = 1.0
         }
         return M
+    }
+    
+    static func makeTranslation(x: Double, y: Double, z: Double) -> Matrix {
+        var trafo = makeIdentity(size: 4)
+        trafo[0, 3] = x
+        trafo[1, 3] = y
+        trafo[2, 3] = z
+        return trafo
+    }
+    
+    func translate(x: Double, y: Double, z: Double) -> Matrix {
+        return  Matrix.makeTranslation(x: x, y: y, z: z) * self
+    }
+    
+    static func makeScaling(x: Double, y: Double, z: Double) -> Matrix {
+        var trafo = makeIdentity(size: 4)
+        trafo[0, 0] = x
+        trafo[1, 1] = y
+        trafo[2, 2] = z
+        return trafo
+    }
+    
+    func scale(x: Double, y: Double, z: Double) -> Matrix {
+        return Matrix.makeScaling(x: x, y: y, z: z) * self
+    }
+    
+    static func makeRotationX(radians: Double) -> Matrix {
+        var trafo = makeIdentity(size: 4)
+        trafo[1, 1] = cos(radians); trafo[1, 2] = -sin(radians)
+        trafo[2, 1] = sin(radians); trafo[2, 2] = cos(radians)
+        return trafo
+    }
+    
+    func rotateX(radians: Double) -> Matrix {
+        return Matrix.makeRotationX(radians: radians) * self
+    }
+    
+    static func makeRotationY(radians: Double) -> Matrix {
+        var trafo = makeIdentity(size: 4)
+        trafo[0, 0] = cos(radians); trafo[0, 2] = sin(radians)
+        trafo[2, 0] = -sin(radians); trafo[2, 2] = cos(radians)
+        return trafo
+    }
+    
+    func rotateY(radians: Double) -> Matrix {
+        return Matrix.makeRotationY(radians: radians) * self
+    }
+    
+    static func makeRotationZ(radians: Double) -> Matrix {
+        var trafo = makeIdentity(size: 4)
+        trafo[0, 0] = cos(radians); trafo[0, 1] = -sin(radians)
+        trafo[1, 0] = sin(radians); trafo[1, 1] = cos(radians)
+        return trafo
+    }
+    
+    func rotateZ(radians: Double) -> Matrix {
+        return Matrix.makeRotationZ(radians: radians) * self
+    }
+    
+    static func makeShear(xy: Double, xz: Double, yx: Double, yz: Double, zx: Double, zy: Double) -> Matrix {
+        var trafo = makeIdentity(size: 4)
+        trafo[0, 1] = xy; trafo[0, 2] = xz
+        trafo[1, 0] = yx; trafo[1, 2] = yz
+        trafo[2, 0] = zx; trafo[2, 1] = zy
+        return trafo
     }
     
     static func * (lhs: Matrix, rhs: Matrix) -> Matrix {
@@ -176,6 +243,7 @@ struct Matrix {
         return result
     }
     
+    /// Fuzzy matching between Matrices
     static func == (lhs: Matrix, rhs: Matrix) -> Bool {
         assert(lhs.rows == rhs.rows)
         assert(lhs.columns == rhs.columns)
@@ -183,7 +251,7 @@ struct Matrix {
         var equal: Bool = true
         for r in 0..<lhs.rows {
             for c in 0..<lhs.columns {
-                if lhs[r, c] != rhs[r, c] {
+                if fabs(lhs[r, c] - rhs[r, c]) >= COMPARE_EPSILON {
                     equal = false
                 }
             }
@@ -196,7 +264,6 @@ struct Matrix {
         return !(lhs == rhs)
     }
 }
-
 
 /// Multiplies a 4-component Tuple with a Matrix
 /// - Parameters:

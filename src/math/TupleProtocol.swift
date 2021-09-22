@@ -7,6 +7,8 @@
 
 import Foundation
 
+let COMPARE_EPSILON = 0.0001
+
 protocol TupleProtocol: Equatable {
     init(x: Double, y: Double, z: Double, w: Double)
     
@@ -26,9 +28,20 @@ extension TupleProtocol {
     }
 }
 
+//func ==<T: TupleProtocol> (lhs: T, rhs: T) -> Bool {
+//    return (lhs.x == rhs.x) && (lhs.y == rhs.y) && (lhs.z == rhs.z) && (lhs.w == rhs.w)
+//}
+
 func ==<T: TupleProtocol> (lhs: T, rhs: T) -> Bool {
-    return (lhs.x == rhs.x) && (lhs.y == rhs.y) && (lhs.z == rhs.z) && (lhs.w == rhs.w)
+    return (fabs(lhs.x - rhs.x) < COMPARE_EPSILON) &&
+            (fabs(lhs.y - rhs.y) < COMPARE_EPSILON) &&
+            (fabs(lhs.z - rhs.z) < COMPARE_EPSILON) &&
+            (fabs(lhs.w - rhs.w) < COMPARE_EPSILON)
 }
+
+//func !~=<T: TupleProtocol> (lhs: T, rhs: T) -> Bool {
+//    return !(lhs ~== rhs)
+//}
 
 func +<T: TupleProtocol> (lhs: T, rhs: T) -> T {
     return T(x: lhs.x+rhs.x, y: lhs.y+rhs.y, z: lhs.z+rhs.z, w: lhs.w+rhs.w)
