@@ -9,8 +9,11 @@ import Foundation
 
 class Sphere: IdentifiableObject, Equatable {
     private var _id: UUID
-    private var _trafo: Matrix4 = Matrix4.makeIdentity()
     var uniqueId: UUID { get{ return _id } }
+    
+    private var _trafo: Matrix4 = Matrix4.makeIdentity()
+    var material: Material = Material()
+   
     var transform: Matrix4 {
         get {
             return _trafo
@@ -27,6 +30,14 @@ class Sphere: IdentifiableObject, Equatable {
     init(trafo: Matrix4) {
         _id = UUID()
         transform = trafo
+    }
+    
+    func normal(at: Tuple) -> Tuple {
+        let objectPoint = transform.inversed * at
+        let objectNormal = objectPoint - Tuple.makePoint(x: 0, y: 0, z: 0)
+        var worldNormal = transform.inversed.transposed * objectNormal
+        worldNormal.w = 0.0
+        return worldNormal.normalized
     }
     
     static func == (lhs: Sphere, rhs: Sphere) -> Bool {

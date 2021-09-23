@@ -37,7 +37,7 @@ func chapTwoPlayground() {
     let ppm = canvas.toPortablePixMap()
     
     let path = FileManager.default.urls(for: .documentDirectory,
-                                        in: .userDomainMask)[0].appendingPathComponent("traj.ppm")
+                                        in:.userDomainMask)[0].appendingPathComponent("traj.ppm")
     
     do {
         try ppm.write(to: path, atomically: false, encoding: .utf8)
@@ -53,22 +53,22 @@ func chapThreePlayground() {
     let clockPositions: [Double] = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map { $0 * Double.pi/180  }
     
     for angle in clockPositions {
-        let drawPix = (Matrix.makeIdentity(size: 4).rotateZ(radians: angle)) * center
+        let drawPix = (Matrix4.makeIdentity().rotateZ(radians: angle)) * center
         canvas[Int(drawPix.x.rounded())+100, canvas.height - Int(drawPix.y.rounded()) - 100] = Color(red: 1, green: 1, blue: 1)
     }
     
     let ppm = canvas.toPortablePixMap()
     do {
         let path = FileManager.default.urls(for: .documentDirectory,
-                                            in: .userDomainMask)[0].appendingPathComponent("clock.ppm")
+                                            in:.userDomainMask)[0].appendingPathComponent("clock.ppm")
         try ppm.write(to: path, atomically: false, encoding: .utf8)
     }
     catch {}
 }
 
 
-/// First try, this is not rendered from one perspective
-func chapFourPlaygroundOne() {
+/// First try, this is not rendered from one perspective und results in wrond image
+func chapFivePlaygroundOne() {
     let canvas = Canvas(width: 100, height: 100)
     let canvasCenterW = canvas.width / 2
     let canvasCenterH = canvas.height / 2
@@ -97,19 +97,20 @@ func chapFourPlaygroundOne() {
     let ppm = canvas.toPortablePixMap()
     do {
         let path = FileManager.default.urls(for: .documentDirectory,
-                                            in: .userDomainMask)[0].appendingPathComponent("sphere2d.ppm")
+                                            in:.userDomainMask)[0].appendingPathComponent("sphere2d.ppm")
         try ppm.write(to: path, atomically: false, encoding: .utf8)
     }
     catch {}
 }
 
 /// Solution according to book
-func chapFourPlaygroundTwo() {
+func chapFivePlaygroundTwo() {
+    let methodStart = Date()
     let rayOrigin = Tuple.makePoint(x: 0, y: 0, z: -5)
     let wallZ = 10.0
     let wallSize = 7.0
     
-    let canvasPixels = 100
+    let canvasPixels = 200
     let pixelSize = wallSize / Double(canvasPixels)
     let half = wallSize / 2.0
     
@@ -133,31 +134,52 @@ func chapFourPlaygroundTwo() {
         }
     }
     
+    let methodFinish = Date()
+    let executionTime = methodFinish.timeIntervalSince(methodStart)
+    print("Rendering time: \(executionTime)")
+    
     let ppm = canvas.toPortablePixMap()
     do {
         let path = FileManager.default.urls(for: .documentDirectory,
-                                            in: .userDomainMask)[0].appendingPathComponent("sphere2d.ppm")
+                                            in:.userDomainMask)[0].appendingPathComponent("sphere2d.ppm")
         try ppm.write(to: path, atomically: false, encoding: .utf8)
     }
     catch {}
 }
 
 /// Solution according to book but parallelized
-func chapFourPlaygroundThree() {
+func chapFivePlaygroundThree() {
+    
+}
+
+/// Solution according to book
+func chapSixPlayground() {
+    let methodStart = Date()
     let rayOrigin = Tuple.makePoint(x: 0, y: 0, z: -5)
     let wallZ = 10.0
     let wallSize = 7.0
     
-    let canvasPixels = 100
+    let canvasPixels = 500
     let pixelSize = wallSize / Double(canvasPixels)
     let half = wallSize / 2.0
     
-    let canvas = Canvas(width: canvasPixels, height: canvasPixels)
-    let color = Color(red: 1, green: 0, blue: 0)
-    let shape = Sphere(trafo: Matrix4.makeIdentity()
-                        .scale(x: 1, y: 0.5, z: 1)
-                        .rotateZ(radians: Double.pi/4))
+    let lightPosition = Tuple.makePoint(x: -10, y: 10, z: -10)
+    let lightColor = Color(red: 1, green: 1, blue: 1)
+    let light = PointLight(position: lightPosition, color: lightColor)
     
+    //let light2 = PointLight(position: Tuple.makePoint(x: 10, y: -10, z: -10), color: Color(red: 0.2, green: 0.8, blue: 0.4))
+    
+    let canvas = Canvas(width: canvasPixels, height: canvasPixels)
+    //let shape = Sphere(trafo: Matrix4.makeIdentity())
+    let shape = Sphere(trafo: Matrix4.makeIdentity()
+                        //.scale(x: 1, y: 0.5, z: 1)
+                        //.rotateZ(radians: -Double.pi/4)
+                        )
+    shape.material.color = Color(red: 0.1, green: 0.5, blue: 0.8)
+    //shape.material.shininess = 150
+    //shape.material.diffuse = 0.9
+    //shape.material.ambient = 0.3
+    //shape.material.specular = 0.4
     
     for y in 0..<canvasPixels {
         let worldY = half - pixelSize * Double(y)
@@ -165,21 +187,35 @@ func chapFourPlaygroundThree() {
             let worldX = -half + pixelSize * Double(x)
             let position = Tuple.makePoint(x: worldX, y: worldY, z: wallZ)
             let r = Ray(origin: rayOrigin, direction: (position-rayOrigin).normalized)
+            
             let xs = r.intersect(sphere: shape)
-            if xs.hit() != nil {
-                canvas[x, y] = color
+            if  let hit = xs.hit() {
+                let hitSphere = hit.object as! Sphere
+                let point = r.position(t: hit.t)
+                let normal = hitSphere.normal(at: point)
+                let eye = -(r.direction)
+                
+                canvas[x, y] = hitSphere.material.lighting(light: light, position: point, eyeVec: eye, normalVec: normal) //+ hitSphere.material.lighting(light: light2, position: point, eyeVec: eye, normalVec: normal)
             }
             
         }
     }
     
+    let methodFinish = Date()
+    let executionTime = methodFinish.timeIntervalSince(methodStart)
+    print("Rendering time: \(executionTime)")
+    
     let ppm = canvas.toPortablePixMap()
     do {
         let path = FileManager.default.urls(for: .documentDirectory,
-                                            in: .userDomainMask)[0].appendingPathComponent("sphere2d.ppm")
+                                            in:.userDomainMask)[0].appendingPathComponent("sphere3d.ppm")
         try ppm.write(to: path, atomically: false, encoding: .utf8)
     }
     catch {}
 }
 
-chapFourPlaygroundTwo()
+//chapOnePlayground()
+//chapTwoPlayground()
+//chapThreePlayground()
+//chapFivePlaygroundTwo()
+chapSixPlayground()

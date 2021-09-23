@@ -145,11 +145,28 @@ class TupleTest: XCTestCase {
         XCTAssertEqual(a.dot(withVector: b), 20.0)
     }
     
+    // p. 10
     func testCrossProduct() throws {
         let a = Tuple.makeVector(x: 1, y: 2, z: 3)
         let b = Tuple.makeVector(x: 2, y: 3, z: 4)
         
         XCTAssertEqual(a.cross(withVector: b), Tuple.makeVector(x: -1, y: 2, z: -1))
         XCTAssertEqual(b.cross(withVector: a), Tuple.makeVector(x: 1, y: -2, z: 1))
+    }
+    
+    // p. 83
+    func testReflectVector45Degrees() throws {
+        let v = Tuple.makeVector(x: 1, y: -1, z: 0)
+        let n = Tuple.makeVector(x: 0, y: 1, z: 0)
+        let r = v.reflect(normal: n)
+        XCTAssertEqual(r, Tuple.makeVector(x: 1, y: 1, z: 0))
+    }
+    
+    // p. 83
+    func testReflectVectorSlanted() throws {
+        let v = Tuple.makeVector(x: 0, y: -1, z: 0)
+        let n = Tuple.makeVector(x: 2.0.squareRoot()/2, y: 2.0.squareRoot()/2, z: 0)
+        let r = v.reflect(normal: n)
+        XCTAssertEqual(r, Tuple.makeVector(x: 1, y: 0, z: 0))
     }
 }
