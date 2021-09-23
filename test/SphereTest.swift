@@ -18,13 +18,13 @@ class SphereTest: XCTestCase {
     // p. 69
     func testSphereHasDefaultTrafo() throws {
         let s = Sphere()
-        XCTAssertEqual(s.transform, Matrix.makeIdentity(size: 4))
+        XCTAssertEqual(s.transform, Matrix4.makeIdentity())
     }
     
     // p. 69
     func testSphereCanChangeTrafo() throws {
         let s = Sphere()
-        let t = Matrix.makeTranslation(x: 2, y: 3, z: 4)
+        let t = Matrix4.makeTranslation(x: 2, y: 3, z: 4)
         s.transform = t
         
         XCTAssertEqual(s.transform, t)

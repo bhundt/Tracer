@@ -32,6 +32,11 @@
 		216AEC3C26FB63E000BDE837 /* Intersection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216AEC3B26FB63E000BDE837 /* Intersection.swift */; };
 		216AEC3D26FB63E000BDE837 /* Intersection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216AEC3B26FB63E000BDE837 /* Intersection.swift */; };
 		216AEC3F26FB645100BDE837 /* IntersectionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216AEC3E26FB645100BDE837 /* IntersectionTest.swift */; };
+		216AEC4126FC60E100BDE837 /* MiscTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216AEC4026FC60E100BDE837 /* MiscTest.swift */; };
+		216AEC4326FC665900BDE837 /* Matrix4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216AEC4226FC665900BDE837 /* Matrix4.swift */; };
+		216AEC4426FC665900BDE837 /* Matrix4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216AEC4226FC665900BDE837 /* Matrix4.swift */; };
+		216AEC4626FC8B3D00BDE837 /* Matrix4ArichtmeticTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216AEC4526FC8B3D00BDE837 /* Matrix4ArichtmeticTest.swift */; };
+		216AEC4826FC90EB00BDE837 /* Matrix4TransformationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216AEC4726FC90EB00BDE837 /* Matrix4TransformationTest.swift */; };
 		21F47DFB26F7D5F60033DA0E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F47DFA26F7D5F60033DA0E /* main.swift */; };
 		21F47E0826F7D7AD0033DA0E /* TupleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F47E0726F7D7AD0033DA0E /* TupleTest.swift */; };
 		21F47E0E26F7D94F0033DA0E /* Tuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F47E0D26F7D94F0033DA0E /* Tuple.swift */; };
@@ -66,6 +71,10 @@
 		216AEC3826FB552A00BDE837 /* IdentifiableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableObject.swift; sourceTree = "<group>"; };
 		216AEC3B26FB63E000BDE837 /* Intersection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intersection.swift; sourceTree = "<group>"; };
 		216AEC3E26FB645100BDE837 /* IntersectionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntersectionTest.swift; sourceTree = "<group>"; };
+		216AEC4026FC60E100BDE837 /* MiscTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MiscTest.swift; path = test/MiscTest.swift; sourceTree = SOURCE_ROOT; };
+		216AEC4226FC665900BDE837 /* Matrix4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix4.swift; sourceTree = "<group>"; };
+		216AEC4526FC8B3D00BDE837 /* Matrix4ArichtmeticTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix4ArichtmeticTest.swift; sourceTree = "<group>"; };
+		216AEC4726FC90EB00BDE837 /* Matrix4TransformationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix4TransformationTest.swift; sourceTree = "<group>"; };
 		21F47DF726F7D5F60033DA0E /* Tracer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Tracer; sourceTree = BUILT_PRODUCTS_DIR; };
 		21F47DFA26F7D5F60033DA0E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		21F47E0526F7D7AD0033DA0E /* TracerTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TracerTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,6 +108,7 @@
 				2163F4A726F89BFC00C5B4A9 /* Color.swift */,
 				2163F4AA26F8A02600C5B4A9 /* TupleProtocol.swift */,
 				2163F4B726F8EB7500C5B4A9 /* Matrix.swift */,
+				216AEC4226FC665900BDE837 /* Matrix4.swift */,
 			);
 			path = math;
 			sourceTree = "<group>";
@@ -163,12 +173,15 @@
 		21F47E0626F7D7AD0033DA0E /* test */ = {
 			isa = PBXGroup;
 			children = (
+				216AEC4026FC60E100BDE837 /* MiscTest.swift */,
 				2163F4AF26F8AD2600C5B4A9 /* CanvasTest.swift */,
 				21F47E0726F7D7AD0033DA0E /* TupleTest.swift */,
 				2163F4AD26F8A17A00C5B4A9 /* ColorTest.swift */,
 				21F47E0926F7D7AD0033DA0E /* Info.plist */,
 				2163F4B526F8EA7700C5B4A9 /* MatrixArithmeticTest.swift */,
+				216AEC4526FC8B3D00BDE837 /* Matrix4ArichtmeticTest.swift */,
 				216AEC2826FA5B6900BDE837 /* MatrixTransformationTest.swift */,
+				216AEC4726FC90EB00BDE837 /* Matrix4TransformationTest.swift */,
 				216AEC2A26FB3B1D00BDE837 /* RayTest.swift */,
 				216AEC3326FB434800BDE837 /* SphereTest.swift */,
 				216AEC3E26FB645100BDE837 /* IntersectionTest.swift */,
@@ -269,6 +282,7 @@
 				216AEC2D26FB3BB800BDE837 /* Ray.swift in Sources */,
 				2163F4B826F8EB7500C5B4A9 /* Matrix.swift in Sources */,
 				216AEC3126FB40B500BDE837 /* Sphere.swift in Sources */,
+				216AEC4326FC665900BDE837 /* Matrix4.swift in Sources */,
 				2163F4AB26F8A02600C5B4A9 /* TupleProtocol.swift in Sources */,
 				21F47E0E26F7D94F0033DA0E /* Tuple.swift in Sources */,
 				2163F4A826F89BFC00C5B4A9 /* Color.swift in Sources */,
@@ -285,8 +299,12 @@
 				2163F4B626F8EA7700C5B4A9 /* MatrixArithmeticTest.swift in Sources */,
 				2163F4B426F8AE2B00C5B4A9 /* Canvas.swift in Sources */,
 				2163F4B926F8EB7500C5B4A9 /* Matrix.swift in Sources */,
+				216AEC4826FC90EB00BDE837 /* Matrix4TransformationTest.swift in Sources */,
 				216AEC2926FA5B6900BDE837 /* MatrixTransformationTest.swift in Sources */,
 				216AEC3D26FB63E000BDE837 /* Intersection.swift in Sources */,
+				216AEC4626FC8B3D00BDE837 /* Matrix4ArichtmeticTest.swift in Sources */,
+				216AEC4126FC60E100BDE837 /* MiscTest.swift in Sources */,
+				216AEC4426FC665900BDE837 /* Matrix4.swift in Sources */,
 				216AEC3426FB434800BDE837 /* SphereTest.swift in Sources */,
 				2163F4AE26F8A17A00C5B4A9 /* ColorTest.swift in Sources */,
 				216AEC2B26FB3B1D00BDE837 /* RayTest.swift in Sources */,

@@ -72,7 +72,7 @@ func chapFourPlaygroundOne() {
     let canvas = Canvas(width: 100, height: 100)
     let canvasCenterW = canvas.width / 2
     let canvasCenterH = canvas.height / 2
-    let s = Sphere(trafo: Matrix.makeIdentity(size: 4)
+    let s = Sphere(trafo: Matrix4.makeIdentity()
                     .scale(x: 10, y: 10, z: 10)
                     .translate(x: Double(canvasCenterW),
                                y: Double(canvasCenterH),
@@ -115,7 +115,49 @@ func chapFourPlaygroundTwo() {
     
     let canvas = Canvas(width: canvasPixels, height: canvasPixels)
     let color = Color(red: 1, green: 0, blue: 0)
-    let shape = Sphere()
+    let shape = Sphere(trafo: Matrix4.makeIdentity()
+                        .scale(x: 1, y: 0.5, z: 1)
+                        .rotateZ(radians: Double.pi/4))
+    
+    for y in 0..<canvasPixels {
+        let worldY = half - pixelSize * Double(y)
+        for x in 0..<canvasPixels {
+            let worldX = -half + pixelSize * Double(x)
+            let position = Tuple.makePoint(x: worldX, y: worldY, z: wallZ)
+            let r = Ray(origin: rayOrigin, direction: (position-rayOrigin).normalized)
+            let xs = r.intersect(sphere: shape)
+            if xs.hit() != nil {
+                canvas[x, y] = color
+            }
+            
+        }
+    }
+    
+    let ppm = canvas.toPortablePixMap()
+    do {
+        let path = FileManager.default.urls(for: .documentDirectory,
+                                            in: .userDomainMask)[0].appendingPathComponent("sphere2d.ppm")
+        try ppm.write(to: path, atomically: false, encoding: .utf8)
+    }
+    catch {}
+}
+
+/// Solution according to book but parallelized
+func chapFourPlaygroundThree() {
+    let rayOrigin = Tuple.makePoint(x: 0, y: 0, z: -5)
+    let wallZ = 10.0
+    let wallSize = 7.0
+    
+    let canvasPixels = 100
+    let pixelSize = wallSize / Double(canvasPixels)
+    let half = wallSize / 2.0
+    
+    let canvas = Canvas(width: canvasPixels, height: canvasPixels)
+    let color = Color(red: 1, green: 0, blue: 0)
+    let shape = Sphere(trafo: Matrix4.makeIdentity()
+                        .scale(x: 1, y: 0.5, z: 1)
+                        .rotateZ(radians: Double.pi/4))
+    
     
     for y in 0..<canvasPixels {
         let worldY = half - pixelSize * Double(y)

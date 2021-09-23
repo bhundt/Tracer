@@ -9,14 +9,13 @@ import Foundation
 
 class Sphere: IdentifiableObject, Equatable {
     private var _id: UUID
-    private var _trafo: Matrix = Matrix.makeIdentity(size: 4)
+    private var _trafo: Matrix4 = Matrix4.makeIdentity()
     var uniqueId: UUID { get{ return _id } }
-    var transform: Matrix {
+    var transform: Matrix4 {
         get {
             return _trafo
         }
         set(t) {
-            assert(t.rows == 4 && t.columns == 4)
             _trafo = t
         }
     }
@@ -25,7 +24,7 @@ class Sphere: IdentifiableObject, Equatable {
         _id = UUID()
     }
     
-    init(trafo: Matrix) {
+    init(trafo: Matrix4) {
         _id = UUID()
         transform = trafo
     }

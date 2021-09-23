@@ -107,7 +107,7 @@ class RayTest: XCTestCase {
     func testTranslateRay() throws {
         let r = Ray(origin: Tuple.makePoint(x: 1, y: 2, z: 3),
                     direction: Tuple.makeVector(x: 0, y: 1, z: 0))
-        let trafo = Matrix.makeTranslation(x: 3, y: 4, z: 5)
+        let trafo = Matrix4.makeTranslation(x: 3, y: 4, z: 5)
         
         let r2 =  r.transform(trafo: trafo)
         
@@ -119,7 +119,7 @@ class RayTest: XCTestCase {
     func testScaleRay() throws {
         let r = Ray(origin: Tuple.makePoint(x: 1, y: 2, z: 3),
                     direction: Tuple.makeVector(x: 0, y: 1, z: 0))
-        let trafo = Matrix.makeScaling(x: 2, y: 3, z: 4)
+        let trafo = Matrix4.makeScaling(x: 2, y: 3, z: 4)
         
         let r2 =  r.transform(trafo: trafo)
         
@@ -132,7 +132,7 @@ class RayTest: XCTestCase {
         let r = Ray(origin: Tuple.makePoint(x: 0, y: 0, z: -5),
                     direction: Tuple.makeVector(x: 0, y: 0, z: 1))
         
-        let s = Sphere(trafo: Matrix.makeScaling(x: 2, y: 2, z: 2))
+        let s = Sphere(trafo: Matrix4.makeScaling(x: 2, y: 2, z: 2))
         let xs = r.intersect(sphere: s)
         
         XCTAssertEqual(xs.count, 2)
@@ -145,7 +145,7 @@ class RayTest: XCTestCase {
         let r = Ray(origin: Tuple.makePoint(x: 0, y: 0, z: -5),
                     direction: Tuple.makeVector(x: 0, y: 0, z: 1))
         
-        let s = Sphere(trafo: Matrix.makeTranslation(x: 5, y: 0, z: 0))
+        let s = Sphere(trafo: Matrix4.makeTranslation(x: 5, y: 0, z: 0))
         let xs = r.intersect(sphere: s)
         
         XCTAssertEqual(xs.count, 0)

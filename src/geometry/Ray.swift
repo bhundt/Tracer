@@ -42,10 +42,7 @@ class Ray {
         return [Intersection(t: t1, obj: sphere), Intersection(t: t2, obj: sphere)]
     }
     
-    func transform(trafo: Matrix) -> Ray {
-        assert(trafo.rows == 4)
-        assert(trafo.columns == 4)
-        
+    func transform(trafo: Matrix4) -> Ray {
         return Ray(origin: trafo * self.origin,
                    direction: trafo * self.direction)
     }
