@@ -24,7 +24,7 @@ class Ray {
     }
     
     func intersect(sphere: Sphere) -> [Intersection] {
-        let ray2 = self.transform(trafo: sphere.transform.inversed)
+        let ray2 = self.transform(trafo: sphere.transform.inversed) // we transform back to a unit sphere centered at 0,0,0
         
         let sphereToRay = ray2.origin - Tuple.makePoint(x: 0, y: 0, z: 0)
         let a = ray2.direction.dot(withVector: ray2.direction)
@@ -42,10 +42,7 @@ class Ray {
         return [Intersection(t: t1, obj: sphere), Intersection(t: t2, obj: sphere)]
     }
     
-    func transform(trafo: Matrix) -> Ray {
-        assert(trafo.rows == 4)
-        assert(trafo.columns == 4)
-        
+    func transform(trafo: Matrix4) -> Ray {
         return Ray(origin: trafo * self.origin,
                    direction: trafo * self.direction)
     }

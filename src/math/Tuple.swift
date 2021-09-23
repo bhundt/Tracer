@@ -50,6 +50,10 @@ struct Tuple: TupleProtocol {
                      w: 0.0)
     }
     
+    func reflect(normal: Tuple) -> Tuple {
+        return self - normal * 2 * self.dot(withVector: normal)
+    }
+    
     static func makePoint(x: Double, y: Double, z: Double) -> Tuple {
         return Tuple(x: x, y: y, z: z, w: 1.0)
     }
