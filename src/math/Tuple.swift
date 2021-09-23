@@ -31,6 +31,8 @@ struct Tuple: TupleProtocol {
     var isPoint: Bool { get {return w == 1.0} }
     var isVector: Bool { get {return w == 0.0} }
     
+    var normalized: Tuple { get {return getNormalized()} }
+    
     func getNormalized() -> Tuple {
         let l = length
         assert(l > 0.0)
