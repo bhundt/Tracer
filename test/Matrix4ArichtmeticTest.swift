@@ -248,19 +248,15 @@ class Matrix4ArichtmeticTest: XCTestCase {
 //    }
     
     // p. 37
-//    func testDeterminant4x4() throws {
-//        var A = Matrix4()
-//        A[0, 0] = -2; A[0, 1] = -8; A[0, 2] = 3; A[0, 3] = 5
-//        A[1, 0] = -3; A[1, 1] = 1; A[1, 2] = 7; A[1, 3] = 3
-//        A[2, 0] = 1; A[2, 1] = 2; A[2, 2] = -9; A[2, 3] = 6
-//        A[3, 0] = -6; A[3, 1] = 7; A[3, 2] = 7; A[3, 3] = -9
-//
-//        XCTAssert( A.cofactor(row: 0, col: 0) == 690 )
-//        XCTAssert( A.cofactor(row: 0, col: 1) == 447 )
-//        XCTAssert( A.cofactor(row: 0, col: 2) == 210 )
-//        XCTAssert( A.cofactor(row: 0, col: 3) == 51 )
-//        XCTAssert( A.determinant == -4071 )
-//    }
+    func testDeterminant4x4() throws {
+        var A = Matrix4()
+        A[0, 0] = -2; A[0, 1] = -8; A[0, 2] = 3; A[0, 3] = 5
+        A[1, 0] = -3; A[1, 1] = 1; A[1, 2] = 7; A[1, 3] = 3
+        A[2, 0] = 1; A[2, 1] = 2; A[2, 2] = -9; A[2, 3] = 6
+        A[3, 0] = -6; A[3, 1] = 7; A[3, 2] = 7; A[3, 3] = -9
+
+        XCTAssert( A.determinant == -4071 )
+    }
     
     // p. 39
     func testInvertibleMatrixDetected() throws {
@@ -297,9 +293,7 @@ class Matrix4ArichtmeticTest: XCTestCase {
         var B = A.inversed
         
         XCTAssert( A.determinant == 532 )
-        //XCTAssert( A.cofactor(row: 2, col: 3) == -160 )
         XCTAssert( B[3, 2] == -160/532 )
-        //XCTAssert( A.cofactor(row: 3, col: 2) == 105 )
         XCTAssert( B[2, 3] == 105/532 )
         
         var R = Matrix4()
