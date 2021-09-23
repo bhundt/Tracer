@@ -20,8 +20,8 @@ class TupleTest: XCTestCase {
         XCTAssertEqual(t.y, -4.2)
         XCTAssertEqual(t.z, 3.1)
         XCTAssertEqual(t.w, 1.0)
-        XCTAssertTrue(t.isPoint())
-        XCTAssertFalse(t.isVector())
+        XCTAssertTrue(t.isPoint)
+        XCTAssertFalse(t.isVector)
     }
     
     // p. 4
@@ -31,8 +31,8 @@ class TupleTest: XCTestCase {
         XCTAssertEqual(t.y, -4.2)
         XCTAssertEqual(t.z, 3.1)
         XCTAssertEqual(t.w, 0.0)
-        XCTAssertFalse(t.isPoint())
-        XCTAssertTrue(t.isVector())
+        XCTAssertFalse(t.isPoint)
+        XCTAssertTrue(t.isVector)
     }
     
     // p. 6
@@ -49,7 +49,7 @@ class TupleTest: XCTestCase {
         let p2 = Tuple.makePoint(x: 5, y: 6, z: 7)
         
         XCTAssertEqual(p1 - p2, Tuple(x: -2, y: -4, z: -6, w: 0))
-        XCTAssertTrue((p1 - p2).isVector())
+        XCTAssertTrue((p1 - p2).isVector)
     }
     
     // p. 6
@@ -58,7 +58,7 @@ class TupleTest: XCTestCase {
         let v = Tuple.makeVector(x: 5, y: 6, z: 7)
         
         XCTAssertEqual(p - v, Tuple(x: -2, y: -4, z: -6, w: 1))
-        XCTAssertTrue((p - v).isPoint())
+        XCTAssertTrue((p - v).isPoint)
     }
     
     // p. 7
@@ -67,7 +67,7 @@ class TupleTest: XCTestCase {
         let v2 = Tuple.makeVector(x: 5, y: 6, z: 7)
         
         XCTAssertEqual(v1 - v2, Tuple(x: -2, y: -4, z: -6, w: 0))
-        XCTAssertTrue((v1 - v2).isVector())
+        XCTAssertTrue((v1 - v2).isVector)
     }
     
     // p. 7

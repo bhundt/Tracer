@@ -9,7 +9,7 @@ import Foundation
 
 infix operator !~=
 
-struct Matrix {
+struct Matrix: Equatable {
     var m: [[Double]] = []
     var rows: Int {get{return _rows}}
     var columns: Int {get{return _columns}}
