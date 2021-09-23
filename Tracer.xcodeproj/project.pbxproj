@@ -17,10 +17,6 @@
 		2163F4B026F8AD2600C5B4A9 /* CanvasTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2163F4AF26F8AD2600C5B4A9 /* CanvasTest.swift */; };
 		2163F4B326F8AE2B00C5B4A9 /* Canvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2163F4B226F8AE2B00C5B4A9 /* Canvas.swift */; };
 		2163F4B426F8AE2B00C5B4A9 /* Canvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2163F4B226F8AE2B00C5B4A9 /* Canvas.swift */; };
-		2163F4B626F8EA7700C5B4A9 /* MatrixArithmeticTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2163F4B526F8EA7700C5B4A9 /* MatrixArithmeticTest.swift */; };
-		2163F4B826F8EB7500C5B4A9 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2163F4B726F8EB7500C5B4A9 /* Matrix.swift */; };
-		2163F4B926F8EB7500C5B4A9 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2163F4B726F8EB7500C5B4A9 /* Matrix.swift */; };
-		216AEC2926FA5B6900BDE837 /* MatrixTransformationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216AEC2826FA5B6900BDE837 /* MatrixTransformationTest.swift */; };
 		216AEC2B26FB3B1D00BDE837 /* RayTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216AEC2A26FB3B1D00BDE837 /* RayTest.swift */; };
 		216AEC2D26FB3BB800BDE837 /* Ray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216AEC2C26FB3BB800BDE837 /* Ray.swift */; };
 		216AEC2E26FB3BB800BDE837 /* Ray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216AEC2C26FB3BB800BDE837 /* Ray.swift */; };
@@ -67,9 +63,6 @@
 		2163F4AD26F8A17A00C5B4A9 /* ColorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTest.swift; sourceTree = "<group>"; };
 		2163F4AF26F8AD2600C5B4A9 /* CanvasTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CanvasTest.swift; path = test/CanvasTest.swift; sourceTree = SOURCE_ROOT; };
 		2163F4B226F8AE2B00C5B4A9 /* Canvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Canvas.swift; sourceTree = "<group>"; };
-		2163F4B526F8EA7700C5B4A9 /* MatrixArithmeticTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixArithmeticTest.swift; sourceTree = "<group>"; };
-		2163F4B726F8EB7500C5B4A9 /* Matrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix.swift; sourceTree = "<group>"; };
-		216AEC2826FA5B6900BDE837 /* MatrixTransformationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixTransformationTest.swift; sourceTree = "<group>"; };
 		216AEC2A26FB3B1D00BDE837 /* RayTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RayTest.swift; sourceTree = "<group>"; };
 		216AEC2C26FB3BB800BDE837 /* Ray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ray.swift; sourceTree = "<group>"; };
 		216AEC3026FB40B500BDE837 /* Sphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sphere.swift; sourceTree = "<group>"; };
@@ -117,7 +110,6 @@
 				21F47E0D26F7D94F0033DA0E /* Tuple.swift */,
 				2163F4A726F89BFC00C5B4A9 /* Color.swift */,
 				2163F4AA26F8A02600C5B4A9 /* TupleProtocol.swift */,
-				2163F4B726F8EB7500C5B4A9 /* Matrix.swift */,
 				216AEC4226FC665900BDE837 /* Matrix4.swift */,
 			);
 			path = math;
@@ -198,9 +190,7 @@
 				21F47E0726F7D7AD0033DA0E /* TupleTest.swift */,
 				2163F4AD26F8A17A00C5B4A9 /* ColorTest.swift */,
 				21F47E0926F7D7AD0033DA0E /* Info.plist */,
-				2163F4B526F8EA7700C5B4A9 /* MatrixArithmeticTest.swift */,
 				216AEC4526FC8B3D00BDE837 /* Matrix4ArichtmeticTest.swift */,
-				216AEC2826FA5B6900BDE837 /* MatrixTransformationTest.swift */,
 				216AEC4726FC90EB00BDE837 /* Matrix4TransformationTest.swift */,
 				216AEC2A26FB3B1D00BDE837 /* RayTest.swift */,
 				216AEC3326FB434800BDE837 /* SphereTest.swift */,
@@ -304,7 +294,6 @@
 				216AEC3926FB552A00BDE837 /* IdentifiableObject.swift in Sources */,
 				216AEC3C26FB63E000BDE837 /* Intersection.swift in Sources */,
 				216AEC2D26FB3BB800BDE837 /* Ray.swift in Sources */,
-				2163F4B826F8EB7500C5B4A9 /* Matrix.swift in Sources */,
 				216AEC3126FB40B500BDE837 /* Sphere.swift in Sources */,
 				216AEC4326FC665900BDE837 /* Matrix4.swift in Sources */,
 				2163F4AB26F8A02600C5B4A9 /* TupleProtocol.swift in Sources */,
@@ -320,11 +309,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2163F4B626F8EA7700C5B4A9 /* MatrixArithmeticTest.swift in Sources */,
 				2163F4B426F8AE2B00C5B4A9 /* Canvas.swift in Sources */,
-				2163F4B926F8EB7500C5B4A9 /* Matrix.swift in Sources */,
 				216AEC4826FC90EB00BDE837 /* Matrix4TransformationTest.swift in Sources */,
-				216AEC2926FA5B6900BDE837 /* MatrixTransformationTest.swift in Sources */,
 				216AEC3D26FB63E000BDE837 /* Intersection.swift in Sources */,
 				216AEC4626FC8B3D00BDE837 /* Matrix4ArichtmeticTest.swift in Sources */,
 				216AEC4126FC60E100BDE837 /* MiscTest.swift in Sources */,
