@@ -42,6 +42,18 @@ class Ray {
         return [Intersection(t: t1, obj: sphere), Intersection(t: t2, obj: sphere)]
     }
     
+    func intersect(world: World) -> [Intersection] {
+        var intersections: [Intersection] = []
+        for obj in world.objects {
+            switch obj {
+            case is Sphere:
+                intersections.append(contentsOf: self.intersect(sphere: obj as! Sphere))
+            default: break
+            }
+        }
+        return intersections.sorted()
+    }
+    
     func transform(trafo: Matrix4) -> Ray {
         return Ray(origin: trafo * self.origin,
                    direction: trafo * self.direction)

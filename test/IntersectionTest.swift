@@ -75,5 +75,43 @@ class IntersectionTest: XCTestCase {
 
         XCTAssertEqual(i, i4)
     }
-
+    
+    // p. 93
+    func testPrecomputingTheStateOfIntersection() throws {
+        let r = Ray(origin: Tuple.makePoint(x: 0, y: 0, z: -5), direction: Tuple.makeVector(x: 0, y: 0, z: 1))
+        let shape = Sphere()
+        let i = Intersection(t: 4.0, obj: shape)
+        
+        let comps = i.prepareComputation(ray: r)
+        
+        XCTAssertEqual(comps.t, i.t)
+        XCTAssertEqual(comps.object as! Sphere, i.object as! Sphere)
+        XCTAssertEqual(comps.point, Tuple.makePoint(x: 0, y: 0, z: -1))
+        XCTAssertEqual(comps.eyeVec, Tuple.makeVector(x: 0, y: 0, z: -1))
+        XCTAssertEqual(comps.normalVec, Tuple.makeVector(x: 0, y: 0, z: -1))
+    }
+    
+    // p. 94
+    func testHitOutsideOfSphere() throws {
+        let r = Ray(origin: Tuple.makePoint(x: 0, y: 0, z: -5), direction: Tuple.makeVector(x: 0, y: 0, z: 1))
+        let shape = Sphere()
+        let i = Intersection(t: 4.0, obj: shape)
+        
+        let comps = i.prepareComputation(ray: r)
+        XCTAssertFalse(comps.inside)
+    }
+    
+    // p. 94
+    func testHitInsideOfSphere() throws {
+        let r = Ray(origin: Tuple.makePoint(x: 0, y: 0, z: 0), direction: Tuple.makeVector(x: 0, y: 0, z: 1))
+        let shape = Sphere()
+        let i = Intersection(t: 1.0, obj: shape)
+        
+        let comps = i.prepareComputation(ray: r)
+        
+        XCTAssertEqual(comps.point, Tuple.makePoint(x: 0, y: 0, z: 1))
+        XCTAssertEqual(comps.eyeVec, Tuple.makeVector(x: 0, y: 0, z: -1))
+        XCTAssertEqual(comps.normalVec, Tuple.makeVector(x: 0, y: 0, z: -1))
+        XCTAssertTrue(comps.inside)
+    }
 }

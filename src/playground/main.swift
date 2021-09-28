@@ -167,8 +167,6 @@ func chapSixPlayground() {
     let lightColor = Color(red: 1, green: 1, blue: 1)
     let light = PointLight(position: lightPosition, color: lightColor)
     
-    //let light2 = PointLight(position: Tuple.makePoint(x: 10, y: -10, z: -10), color: Color(red: 0.2, green: 0.8, blue: 0.4))
-    
     let canvas = Canvas(width: canvasPixels, height: canvasPixels)
     //let shape = Sphere(trafo: Matrix4.makeIdentity())
     let shape = Sphere(trafo: Matrix4.makeIdentity()

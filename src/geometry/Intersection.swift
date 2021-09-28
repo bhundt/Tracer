@@ -10,17 +10,57 @@ import Foundation
 /// Description
 class Intersection: Equatable {
     var t: Double     // the intersection along a ray
-    var object: Any   // the object the ray intersected with
+    var object: CollidableObject & IdentifiableObject  // the object the ray intersected with
     
-    init(t: Double, obj: Any) {
+    init(t: Double, obj: CollidableObject & IdentifiableObject) {
         self.object = obj
         self.t = t
     }
     
+    func prepareComputation(ray: Ray) -> PrecomputeData {
+        let i = self
+        let t = i.t
+        let obj = i.object
+        
+        let point = ray.position(t: t)
+        let eyeVec = -ray.direction
+        var normalVec = i.object.normal(at: point)
+        var inside = false
+        
+        if normalVec.dot(withVector: eyeVec) < 0 {
+            inside = true
+            normalVec = -normalVec
+        }
+        
+        let c = PrecomputeData(t: t, object: obj, point: point, eyeVec: eyeVec, normalVec: normalVec, inside: inside)
+        return c
+    }
+
+    
     static func == (lhs: Intersection, rhs: Intersection) -> Bool {
-        return ((lhs.object as! IdentifiableObject).uniqueId == (rhs.object as! IdentifiableObject).uniqueId) && (lhs.t == rhs.t)
+        return (lhs.object.uniqueId == rhs.object.uniqueId) && (lhs.t == rhs.t)
     }
 }
+
+/// Holds pre computable info about an intersection
+struct PrecomputeData {
+    var t: Double
+    var object: CollidableObject
+    var point: Tuple
+    var eyeVec: Tuple
+    var normalVec: Tuple
+    var inside: Bool
+    
+    init(t: Double, object: CollidableObject, point: Tuple, eyeVec: Tuple, normalVec: Tuple, inside: Bool) {
+        self.t = t
+        self.object = object
+        self.point = point
+        self.eyeVec = eyeVec
+        self.normalVec = normalVec
+        self.inside = inside
+    }
+}
+
 
 extension Array where Element == Intersection {
     /// Sort the intetrsections by ascending t-value
@@ -42,4 +82,5 @@ extension Array where Element == Intersection {
         }
         return nil
     }
+
 }

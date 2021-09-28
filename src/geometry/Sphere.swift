@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Sphere: IdentifiableObject, Equatable {
+class Sphere: CollidableObject, IdentifiableObject, ShadeableObject, Equatable {
     private var _id: UUID
     var uniqueId: UUID { get{ return _id } }
     
