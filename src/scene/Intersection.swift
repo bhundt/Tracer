@@ -7,17 +7,18 @@
 
 import Foundation
 
-/// Description
+/// An intersection represents a collision of a ray with a geometric shape
 class Intersection: Equatable {
-    var t: Double     // the intersection along a ray
-    var object: CollidableObject & IdentifiableObject  // the object the ray intersected with
+    var t: Double                                       // the intersection along the ray
+    var object: CollidableObject & IdentifiableObject   // the object the ray intersected with
     
     init(t: Double, obj: CollidableObject & IdentifiableObject) {
         self.object = obj
         self.t = t
     }
     
-    func prepareComputation(ray: Ray) -> PrecomputeData {
+    
+    func prepareComputation(ray: Ray) -> ShadingHelperData {
         let i = self
         let t = i.t
         let obj = i.object
@@ -32,7 +33,7 @@ class Intersection: Equatable {
             normalVec = -normalVec
         }
         
-        let c = PrecomputeData(t: t, object: obj, point: point, eyeVec: eyeVec, normalVec: normalVec, inside: inside)
+        let c = ShadingHelperData(t: t, object: obj, point: point, eyeVec: eyeVec, normalVec: normalVec, inside: inside)
         return c
     }
 
@@ -43,7 +44,7 @@ class Intersection: Equatable {
 }
 
 /// Holds pre computable info about an intersection
-struct PrecomputeData {
+struct ShadingHelperData {
     var t: Double
     var object: CollidableObject
     var point: Tuple
@@ -61,13 +62,12 @@ struct PrecomputeData {
     }
 }
 
-
+/// These extension help using an array of intersections
 extension Array where Element == Intersection {
     /// Sort the intetrsections by ascending t-value
     mutating func sort() {
         self.sort(by: { $0.t < $1.t })
     }
-    
     
     /// Returns a sorted version of the intersections
     func sorted() -> Array {

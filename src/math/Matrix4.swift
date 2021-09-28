@@ -126,6 +126,23 @@ struct Matrix4: Equatable {
         return trafo
     }
     
+    static func makeviewTransform(from: Tuple, to: Tuple, up: Tuple) -> Matrix4 {
+        assert(from.isPoint); assert(to.isPoint); assert(up.isVector)
+        
+        let forward = (to-from).normalized
+        let upn = up.normalized
+        let left = forward.cross(withVector: upn)
+        let true_up = left.cross(withVector: forward)
+        
+        var R = Matrix4()
+        R[0, 0] = left.x; R[0, 1] = left.y; R[0, 2] = left.z; R[0, 3] = 0
+        R[1, 0] = true_up.x; R[1, 1] = true_up.y; R[1, 2] = true_up.z; R[1, 3] = 0
+        R[2, 0] = -forward.x; R[2, 1] = -forward.y; R[2, 2] = -forward.z; R[2, 3] = 0
+        R[3, 0] = 0; R[3, 1] = 0; R[3, 2] = 0; R[3, 3] = 1
+        
+        return R * Matrix4.makeTranslation(x: -from.x, y: -from.y, z: -from.z)
+    }
+    
     static func * (lhs: Matrix4, rhs: Matrix4) -> Matrix4 {
         return Matrix4(nativeMatrix: matrix_multiply(rhs.m, lhs.m))
     }

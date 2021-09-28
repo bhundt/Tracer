@@ -11,7 +11,7 @@ class World {
     var objects: [IdentifiableObject & CollidableObject & ShadeableObject] = []
     var lights: [IdentifiableObject] = []
     
-    func shadeHit(comps: PrecomputeData) -> Color {
+    func shadeHit(comps: ShadingHelperData) -> Color {
         // FIX: as! PointLight
         return (comps.object as! ShadeableObject).material.lighting(light: self.lights[0] as! PointLight, position: comps.point, eyeVec: comps.eyeVec, normalVec: comps.normalVec)
     }
