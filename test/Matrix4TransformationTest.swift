@@ -149,4 +149,51 @@ class Matrix4TransformationTest: XCTestCase {
         let p = Tuple.makePoint(x: 1, y: 0, z: 1)
         XCTAssertEqual(T * p, Tuple.makePoint(x: 15, y: 0, z: 7))
     }
+    
+    // p. 98
+    func testDefaultViewTransform() throws {
+        let from = Tuple.makePoint(x: 0, y: 0, z: 0)
+        let to = Tuple.makePoint(x: 0, y: 0, z: -1)
+        let up = Tuple.makeVector(x: 0, y: 1, z: 0)
+        
+        let t = Matrix4.makeviewTransform(from: from, to: to, up: up)
+        XCTAssertEqual(t, Matrix4.makeIdentity())
+    }
+    
+    // p. 98
+    func testViewTransformPositiveZAxis() throws {
+        let from = Tuple.makePoint(x: 0, y: 0, z: 0)
+        let to = Tuple.makePoint(x: 0, y: 0, z: 1)
+        let up = Tuple.makeVector(x: 0, y: 1, z: 0)
+        
+        let t = Matrix4.makeviewTransform(from: from, to: to, up: up)
+        XCTAssertEqual(t, Matrix4.makeScaling(x: -1, y: 1, z: -1))
+    }
+    
+    // p. 99
+    func testViewTransformMovesTheWorld() throws {
+        let from = Tuple.makePoint(x: 0, y: 0, z: 8)
+        let to = Tuple.makePoint(x: 0, y: 0, z: 1)
+        let up = Tuple.makeVector(x: 0, y: 1, z: 0)
+        
+        let t = Matrix4.makeviewTransform(from: from, to: to, up: up)
+        XCTAssertEqual(t, Matrix4.makeTranslation(x: 0, y: 0, z: -8))
+    }
+    
+    // p. 99
+    func testSomeViewTransformation() throws {
+        let from = Tuple.makePoint(x: 1, y: 3, z: 2)
+        let to = Tuple.makePoint(x: 4, y: -2, z: 8)
+        let up = Tuple.makeVector(x: 1, y: 1, z: 0)
+        
+        let t = Matrix4.makeviewTransform(from: from, to: to, up: up)
+        
+        var R = Matrix4()
+        R[0, 0] = -0.50709; R[0, 1] = 0.50709; R[0, 2] = 0.67612; R[0, 3] = -2.36643
+        R[1, 0] = 0.76772; R[1, 1] = 0.60609; R[1, 2] = 0.12122; R[1, 3] = -2.82843
+        R[2, 0] = -0.35857; R[2, 1] = 0.59761; R[2, 2] = -0.71714; R[2, 3] = 0.00000
+        R[3, 0] = 0.00000; R[3, 1] = 0.00000; R[3, 2] = 0.00000; R[3, 3] = 1.00000
+        
+        XCTAssertEqual(t, R)
+    }
 }

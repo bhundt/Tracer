@@ -88,8 +88,7 @@ class SphereTest: XCTestCase {
     // p. 85
     func testSphereHasMaterial() throws {
         let s = Sphere()
-        let m = s.material
-        XCTAssert(m is Material)
+        let _ = s.material
     }
     
     // p. 85

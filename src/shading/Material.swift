@@ -14,11 +14,9 @@ struct Material: Equatable {
     var specular: Double = 0.9
     var shininess: Double = 200.0
     
-    
+    /// Calculates Phong shading
     func lighting(light: PointLight, position: Tuple, eyeVec: Tuple, normalVec: Tuple) -> Color{
-        assert(position.isPoint)
-        assert(eyeVec.isVector)
-        assert(normalVec.isVector)
+        assert(position.isPoint); assert(eyeVec.isVector); assert(normalVec.isVector)
         
         let effColor = self.color * light.color
         let lightVec = (light.position - position).normalized
@@ -53,6 +51,5 @@ struct Material: Equatable {
                 (lhs.diffuse == rhs.diffuse) &&
                 (lhs.specular == rhs.specular) &&
                 (lhs.shininess == rhs.shininess))
-        
     }
 }
