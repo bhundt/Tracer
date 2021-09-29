@@ -20,14 +20,6 @@ struct Tuple: TupleProtocol {
         self.w = w
     }
     
-    /*func isPoint() -> Bool {
-        return w == 1.0
-    }
-    
-    func isVector() -> Bool {
-        return w == 0.0
-    }*/
-    
     var isPoint: Bool { get {return w == 1.0} }
     var isVector: Bool { get {return w == 0.0} }
     

@@ -212,8 +212,66 @@ func chapSixPlayground() {
     catch {}
 }
 
+func chapSevenPlayground() {
+    let floor = Sphere()
+    floor.transform = Matrix4.makeScaling(x: 10, y: 0.01, z: 10)
+    floor.material.color = Color(red: 0.2, green: 0.3, blue: 0.7)
+    floor.material.specular = 0
+    
+    let leftWall = Sphere()
+    leftWall.transform = Matrix4.makeScaling(x: 10, y: 0.01, z: 10).rotateX(radians: Double.pi/2).rotateY(radians: -Double.pi/4).translate(x: 0, y: 0, z: 5)
+    leftWall.material.color = Color(red: 0.4, green: 0.5, blue: 0.85)
+    
+    let rightWall = Sphere()
+    rightWall.transform = Matrix4.makeScaling(x: 10, y: 0.01, z: 10).rotateX(radians: Double.pi/2).rotateY(radians: Double.pi/4).translate(x: 0, y: 0, z: 5)
+    rightWall.material.color = Color(red: 0.4, green: 0.5, blue: 0.85)
+    
+    let middle = Sphere()
+    middle.transform = Matrix4.makeTranslation(x: -0.5, y: 1, z: 0.5)
+    middle.material.color = Color(red: 0.1, green: 1, blue: 0.5)
+    middle.material.diffuse = 0.7
+    middle.material.specular = 0.3
+    
+    let right = Sphere()
+    right.transform = Matrix4.makeTranslation(x: 1.5, y: 0.5, z: -0.5) * Matrix4.makeScaling(x: 0.5, y: 0.5, z: 0.5)
+    right.material.color = Color(red: 0.5, green: 1, blue: 0.1)
+    right.material.diffuse = 0.7
+    right.material.specular = 0.3
+    
+    let left = Sphere()
+    left.transform = Matrix4.makeTranslation(x: -1.5, y: 0.33, z: -0.75) * Matrix4.makeScaling(x: 0.33, y: 0.33, z: 0.33)
+    left.material.color = Color(red: 1, green: 0.8, blue: 0.1)
+    left.material.diffuse = 0.7
+    left.material.specular = 0.3
+    
+    let light = PointLight(position: Tuple.makePoint(x: -10, y: 10, z: -10), color: Color(red: 1, green: 1, blue: 1))
+    
+    let camera = Camera(horizontalSize: 1000, verticalSize: 500, fov: Double.pi/3)
+    camera.transform = Matrix4.makeviewTransform(from: Tuple.makePoint(x: 0, y: 1.5, z: -5), to: Tuple.makePoint(x: 0, y: 1, z: 0), up: Tuple.makeVector(x: 0, y: 1, z: 0))
+    
+    let w = World()
+    w.objects.append(middle)
+    w.objects.append(left)
+    w.objects.append(right)
+    w.objects.append(leftWall)
+    w.objects.append(rightWall)
+    w.objects.append(floor)
+    w.lights.append(light)
+    
+    let canvas = Renderer.render(camera: camera, world: w)
+    
+    let ppm = canvas.toPortablePixMap()
+    do {
+        let path = FileManager.default.urls(for: .documentDirectory,
+                                            in:.userDomainMask)[0].appendingPathComponent("scene.ppm")
+        try ppm.write(to: path, atomically: false, encoding: .utf8)
+    }
+    catch {}
+}
+
 //chapOnePlayground()
 //chapTwoPlayground()
 //chapThreePlayground()
 //chapFivePlaygroundTwo()
-chapSixPlayground()
+//chapSixPlayground()
+chapSevenPlayground()

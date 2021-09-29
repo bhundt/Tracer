@@ -51,19 +51,6 @@ class Camera {
         return Ray(origin: origin, direction: direction)
     }
     
-    // TODO: move to a place mure suitable
-    func render(world: World) -> Canvas {
-        let image = Canvas(width: horizontalSize, height: verticalSize)
-        for y in 0 ..< verticalSize {
-            for x in 0 ..< horizontalSize {
-                let ray = rayForPixel(x: x, y: y)
-                let color = world.colorAt(ray: ray)
-                image[x, y] = color
-            }
-        }
-        return image
-    }
-    
     private func calcProperties() {
         _halfView = tan(_fov/2)
         _aspect = Double(_horizontalSize)/Double(_verticalSize)

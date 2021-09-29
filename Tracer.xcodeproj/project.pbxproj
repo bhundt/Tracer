@@ -45,6 +45,8 @@
 		21B90BF72703429B00A15CB4 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B90BF52703429B00A15CB4 /* Camera.swift */; };
 		21B90BFA270396F800A15CB4 /* Material.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B90BF9270396F800A15CB4 /* Material.swift */; };
 		21B90BFB270396F800A15CB4 /* Material.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B90BF9270396F800A15CB4 /* Material.swift */; };
+		21B90BFE2704467700A15CB4 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B90BFD2704467700A15CB4 /* Renderer.swift */; };
+		21B90BFF2704467700A15CB4 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B90BFD2704467700A15CB4 /* Renderer.swift */; };
 		21F47DFB26F7D5F60033DA0E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F47DFA26F7D5F60033DA0E /* main.swift */; };
 		21F47E0826F7D7AD0033DA0E /* TupleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F47E0726F7D7AD0033DA0E /* TupleTest.swift */; };
 		21F47E0E26F7D94F0033DA0E /* Tuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F47E0D26F7D94F0033DA0E /* Tuple.swift */; };
@@ -89,6 +91,7 @@
 		21B90BF32703421400A15CB4 /* CameraTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraTest.swift; sourceTree = "<group>"; };
 		21B90BF52703429B00A15CB4 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		21B90BF9270396F800A15CB4 /* Material.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Material.swift; sourceTree = "<group>"; };
+		21B90BFD2704467700A15CB4 /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 		21F47DF726F7D5F60033DA0E /* Tracer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Tracer; sourceTree = BUILT_PRODUCTS_DIR; };
 		21F47DFA26F7D5F60033DA0E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		21F47E0526F7D7AD0033DA0E /* TracerTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TracerTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				2163F4B226F8AE2B00C5B4A9 /* Canvas.swift */,
+				21B90BFD2704467700A15CB4 /* Renderer.swift */,
 			);
 			path = graphics;
 			sourceTree = "<group>";
@@ -305,6 +309,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21B90BFE2704467700A15CB4 /* Renderer.swift in Sources */,
 				216AEC4B26FCB1B800BDE837 /* PointLight.swift in Sources */,
 				216AEC3926FB552A00BDE837 /* Objects.swift in Sources */,
 				216AEC3C26FB63E000BDE837 /* Intersection.swift in Sources */,
@@ -343,6 +348,7 @@
 				214437CA26F87B9800925AA1 /* Tuple.swift in Sources */,
 				216AEC4E26FCB1C900BDE837 /* PointLightTest.swift in Sources */,
 				216AEC4C26FCB1B800BDE837 /* PointLight.swift in Sources */,
+				21B90BFF2704467700A15CB4 /* Renderer.swift in Sources */,
 				21F47E0826F7D7AD0033DA0E /* TupleTest.swift in Sources */,
 				21B90BF027031F3E00A15CB4 /* WorldTest.swift in Sources */,
 				21B90BFB270396F800A15CB4 /* Material.swift in Sources */,

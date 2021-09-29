@@ -65,7 +65,7 @@ class CameraTest: XCTestCase {
         
         c.transform = Matrix4.makeviewTransform(from: from, to: to, up: up)
         
-        let image = c.render(world: w)
+        let image = Renderer.render(camera: c, world: w)
         XCTAssertEqual(image[5, 5], Color(red: 0.38066, green: 0.47583, blue: 0.2855))
     }
 }
