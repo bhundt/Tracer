@@ -84,8 +84,9 @@ func chapFivePlaygroundOne() {
                                                   y: Double(h),
                                                   z: -1),
                           direction: Tuple.makeVector(x: 0, y: 0, z: 1))
-            let xs = ray.intersect(sphere: s)
-            let hits = xs.hit()
+            //let xs = ray.intersect(sphere: s)
+            let xs = Collider.intersect(ray: ray, withSphere: s)
+            let hits = [xs.0!, xs.1!].hit()
 
             if hits != nil {
                 print("HIT! x: \(w) y: \(h)")
@@ -126,8 +127,9 @@ func chapFivePlaygroundTwo() {
             let worldX = -half + pixelSize * Double(x)
             let position = Tuple.makePoint(x: worldX, y: worldY, z: wallZ)
             let r = Ray(origin: rayOrigin, direction: (position-rayOrigin).normalized)
-            let xs = r.intersect(sphere: shape)
-            if xs.hit() != nil {
+            //let xs = r.intersect(sphere: shape)
+            let xs = Collider.intersect(ray: r, withSphere: shape)
+            if [xs.0!, xs.1!].hit() != nil {
                 canvas[x, y] = color
             }
             
@@ -186,14 +188,15 @@ func chapSixPlayground() {
             let position = Tuple.makePoint(x: worldX, y: worldY, z: wallZ)
             let r = Ray(origin: rayOrigin, direction: (position-rayOrigin).normalized)
             
-            let xs = r.intersect(sphere: shape)
-            if  let hit = xs.hit() {
+            //let xs = r.intersect(sphere: shape)
+            let xs = Collider.intersect(ray: r, withSphere: shape)
+            if  let hit = [xs.0!, xs.1!].hit() {
                 let hitSphere = hit.object as! Sphere
                 let point = r.position(t: hit.t)
                 let normal = hitSphere.normal(at: point)
                 let eye = -(r.direction)
                 
-                canvas[x, y] = hitSphere.material.lighting(light: light, position: point, eyeVec: eye, normalVec: normal) //+ hitSphere.material.lighting(light: light2, position: point, eyeVec: eye, normalVec: normal)
+                canvas[x, y] = hitSphere.material.lighting(light: light, position: point, eyeVec: eye, normalVec: normal, inShadow: false) //+ hitSphere.material.lighting(light: light2, position: point, eyeVec: eye, normalVec: normal)
             }
             
         }
@@ -246,16 +249,11 @@ func chapSevenPlayground() {
     
     let light = PointLight(position: Tuple.makePoint(x: -10, y: 10, z: -10), color: Color(red: 1, green: 1, blue: 1))
     
-    let camera = Camera(horizontalSize: 1000, verticalSize: 500, fov: Double.pi/3)
-    camera.transform = Matrix4.makeviewTransform(from: Tuple.makePoint(x: 0, y: 1.5, z: -5), to: Tuple.makePoint(x: 0, y: 1, z: 0), up: Tuple.makeVector(x: 0, y: 1, z: 0))
+    let camera = Camera(horizontalSize: 250*4, verticalSize: 125*4, fov: Double.pi/3)
+    camera.transform = Matrix4.makeviewTransform(from: Tuple.makePoint(x: 0, y: 1.5, z: -5), to: Tuple.makePoint(x: 0, y: 1, z: 0), up: Tuple.makeVector(x: 0, y: 1, z: 0)).rotateY(radians: Double.pi/32)
     
     let w = World()
-    w.objects.append(middle)
-    w.objects.append(left)
-    w.objects.append(right)
-    w.objects.append(leftWall)
-    w.objects.append(rightWall)
-    w.objects.append(floor)
+    w.objects.append(contentsOf: [middle, left, right, leftWall, rightWall, floor])
     w.lights.append(light)
     
     let canvas = Renderer.render(camera: camera, world: w)

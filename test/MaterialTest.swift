@@ -30,7 +30,7 @@ class MaterialLightningTest: XCTestCase {
         let normalv = Tuple.makeVector(x: 0, y: 0, z: -1)
         let light = PointLight(position: Tuple.makePoint(x: 0, y: 0, z: -10), color: Color(red: 1, green: 1, blue: 1))
         
-        let result = m.lighting(light: light, position: position, eyeVec: eyev, normalVec: normalv)
+        let result = m.lighting(light: light, position: position, eyeVec: eyev, normalVec: normalv, inShadow: false)
         
         XCTAssertEqual(result, Color(red: 1.9, green: 1.9, blue: 1.9))
     }
@@ -41,7 +41,7 @@ class MaterialLightningTest: XCTestCase {
         let normalv = Tuple.makeVector(x: 0, y: 0, z: -1)
         let light = PointLight(position: Tuple.makePoint(x: 0, y: 0, z: -10), color: Color(red: 1, green: 1, blue: 1))
         
-        let result = m.lighting(light: light, position: position, eyeVec: eyev, normalVec: normalv)
+        let result = m.lighting(light: light, position: position, eyeVec: eyev, normalVec: normalv, inShadow: false)
         
         XCTAssertEqual(result, Color(red: 1.0, green: 1.0, blue: 1.0))
     }
@@ -52,7 +52,7 @@ class MaterialLightningTest: XCTestCase {
         let normalv = Tuple.makeVector(x: 0, y: 0, z: -1)
         let light = PointLight(position: Tuple.makePoint(x: 0, y: 10, z: -10), color: Color(red: 1, green: 1, blue: 1))
         
-        let result = m.lighting(light: light, position: position, eyeVec: eyev, normalVec: normalv)
+        let result = m.lighting(light: light, position: position, eyeVec: eyev, normalVec: normalv, inShadow: false)
         
         XCTAssertEqual(result, Color(red: 0.7364, green: 0.7364, blue: 0.7364))
     }
@@ -63,7 +63,7 @@ class MaterialLightningTest: XCTestCase {
         let normalv = Tuple.makeVector(x: 0, y: 0, z: -1)
         let light = PointLight(position: Tuple.makePoint(x: 0, y: 10, z: -10), color: Color(red: 1, green: 1, blue: 1))
         
-        let result = m.lighting(light: light, position: position, eyeVec: eyev, normalVec: normalv)
+        let result = m.lighting(light: light, position: position, eyeVec: eyev, normalVec: normalv, inShadow: false)
         
         XCTAssertEqual(result, Color(red: 1.6364, green: 1.6364, blue: 1.6364))
     }
@@ -74,7 +74,18 @@ class MaterialLightningTest: XCTestCase {
         let normalv = Tuple.makeVector(x: 0, y: 0, z: -1)
         let light = PointLight(position: Tuple.makePoint(x: 0, y: 0, z: 10), color: Color(red: 1, green: 1, blue: 1))
         
-        let result = m.lighting(light: light, position: position, eyeVec: eyev, normalVec: normalv)
+        let result = m.lighting(light: light, position: position, eyeVec: eyev, normalVec: normalv, inShadow: false)
+        
+        XCTAssertEqual(result, Color(red: 0.1, green: 0.1, blue: 0.1))
+    }
+    
+    // p. 110
+    func testLightingWithSurfaceInShadow() throws {
+        let eyev = Tuple.makeVector(x: 0, y: 0, z: -1)
+        let normalv = Tuple.makeVector(x: 0, y: 0, z: -1)
+        let light = PointLight(position: Tuple.makePoint(x: 0, y: 0, z: -10), color: Color(red: 1, green: 1, blue: 1))
+        
+        let result = m.lighting(light: light, position: position, eyeVec: eyev, normalVec: normalv, inShadow: true)
         
         XCTAssertEqual(result, Color(red: 0.1, green: 0.1, blue: 0.1))
     }

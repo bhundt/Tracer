@@ -15,13 +15,17 @@ struct Material: Equatable {
     var shininess: Double = 200.0
     
     /// Calculates Phong shading
-    func lighting(light: PointLight, position: Tuple, eyeVec: Tuple, normalVec: Tuple) -> Color{
+    func lighting(light: PointLight, position: Tuple, eyeVec: Tuple, normalVec: Tuple, inShadow: Bool) -> Color{
         assert(position.isPoint); assert(eyeVec.isVector); assert(normalVec.isVector)
         
         let effColor = self.color * light.color
         let lightVec = (light.position - position).normalized
         
         let amb = effColor * self.ambient
+        if inShadow { // when we are in shadow we only are lit by ambient light
+            return amb
+        }
+        
         var dif = Color(red: 0, green: 0, blue: 0)
         var spec = Color(red: 0, green: 0, blue: 0)
         

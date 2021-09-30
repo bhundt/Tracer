@@ -8,7 +8,7 @@
 import Foundation
 
 /// An intersection represents a collision of a ray with a geometric shape
-class Intersection: Equatable {
+struct Intersection: Equatable {
     var t: Double                                       // the intersection along the ray
     var object: CollidableObject & IdentifiableObject   // the object the ray intersected with
     
@@ -16,7 +16,6 @@ class Intersection: Equatable {
         self.object = obj
         self.t = t
     }
-    
     
     func prepareComputation(ray: Ray) -> ShadingHelperData {
         let i = self
@@ -33,7 +32,9 @@ class Intersection: Equatable {
             normalVec = -normalVec
         }
         
-        let c = ShadingHelperData(t: t, object: obj, point: point, eyeVec: eyeVec, normalVec: normalVec, inside: inside)
+        let oP = point + normalVec * COMPARE_EPSILON
+        
+        let c = ShadingHelperData(t: t, object: obj, point: point, eyeVec: eyeVec, normalVec: normalVec, inside: inside, overPoint: oP)
         return c
     }
 
@@ -51,36 +52,15 @@ struct ShadingHelperData {
     var eyeVec: Tuple
     var normalVec: Tuple
     var inside: Bool
+    var overPoint: Tuple
     
-    init(t: Double, object: CollidableObject, point: Tuple, eyeVec: Tuple, normalVec: Tuple, inside: Bool) {
+    init(t: Double, object: CollidableObject, point: Tuple, eyeVec: Tuple, normalVec: Tuple, inside: Bool, overPoint: Tuple) {
         self.t = t
         self.object = object
         self.point = point
         self.eyeVec = eyeVec
         self.normalVec = normalVec
         self.inside = inside
+        self.overPoint = overPoint
     }
-}
-
-/// These extension help using an array of intersections
-extension Array where Element == Intersection {
-    /// Sort the intetrsections by ascending t-value
-    mutating func sort() {
-        self.sort(by: { $0.t < $1.t })
-    }
-    
-    /// Returns a sorted version of the intersections
-    func sorted() -> Array {
-        return self.sorted(by: { $0.t < $1.t })
-    }
-    
-    /// Finds the nearest hit from the ray. Nearest means smallest, non-negative t-value
-    func hit() -> Intersection? {
-        let hits = self.sorted().filter({ elem in elem.t >= 0.0 })
-        if hits.count > 0 {
-            return hits.first
-        }
-        return nil
-    }
-
 }

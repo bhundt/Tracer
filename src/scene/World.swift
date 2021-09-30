@@ -11,13 +11,17 @@ class World {
     var objects: [IdentifiableObject & CollidableObject & ShadeableObject] = []
     var lights: [IdentifiableObject] = []
     
+    // move to Renderer
     func shadeHit(comps: ShadingHelperData) -> Color {
         // FIX: as! PointLight
-        return (comps.object as! ShadeableObject).material.lighting(light: self.lights[0] as! PointLight, position: comps.point, eyeVec: comps.eyeVec, normalVec: comps.normalVec)
+        // FIX: multiple lights
+        let shadowed = Renderer.isPointInShadow(world: self, point: comps.overPoint)
+        return (comps.object as! ShadeableObject).material.lighting(light: self.lights[0] as! PointLight, position: comps.point, eyeVec: comps.eyeVec, normalVec: comps.normalVec, inShadow: shadowed)
     }
     
+    // move to Renderer
     func colorAt(ray: Ray) -> Color {
-        let intersections = ray.intersect(world: self)
+        let intersections = Collider.intersect(ray: ray, withWorld: self)
         
         if let i = intersections.hit() {
             let comps = i.prepareComputation(ray: ray)

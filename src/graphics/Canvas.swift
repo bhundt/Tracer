@@ -11,8 +11,7 @@ class Canvas {
     var pixels: [[Color]]  = []
     
     init(width: Int, height: Int) {
-        assert(width > 0)
-        assert(height > 0)
+        assert(width > 0); assert(height > 0)
         self.w = width
         self.h = height
         
@@ -26,17 +25,11 @@ class Canvas {
     
     subscript(indexX: Int, indexY: Int) -> Color {
         get {
-            assert(indexX < width)
-            assert(indexX >= 0)
-            assert(indexY < height)
-            assert(indexX >= 0)
+            assert(indexX < width); assert(indexX >= 0); assert(indexY < height); assert(indexX >= 0)
             return pixels[indexX][indexY]
         }
         set(newColor) {
-            assert(indexX < width)
-            assert(indexX >= 0)
-            assert(indexY < height)
-            assert(indexX >= 0)
+            assert(indexX < width); assert(indexX >= 0); assert(indexY < height); assert(indexX >= 0)
             pixels[indexX][indexY] = newColor
         }
     }
@@ -87,7 +80,5 @@ class Canvas {
         }
         
         return export.joined(separator: "\n").appending("\n")
-        
-        //return map
     }
 }
