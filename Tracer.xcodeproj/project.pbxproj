@@ -51,6 +51,9 @@
 		21B90C072709AE5C00A15CB4 /* ShapeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B90C062709AE5C00A15CB4 /* ShapeTest.swift */; };
 		21B90C092709AF3000A15CB4 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B90C082709AF3000A15CB4 /* Shape.swift */; };
 		21B90C0A2709AF3000A15CB4 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B90C082709AF3000A15CB4 /* Shape.swift */; };
+		21B90C0C2709C0AF00A15CB4 /* PlaneTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B90C0B2709C0AF00A15CB4 /* PlaneTest.swift */; };
+		21B90C0E2709C14000A15CB4 /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B90C0D2709C14000A15CB4 /* Plane.swift */; };
+		21B90C0F2709C14000A15CB4 /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B90C0D2709C14000A15CB4 /* Plane.swift */; };
 		21F47DFB26F7D5F60033DA0E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F47DFA26F7D5F60033DA0E /* main.swift */; };
 		21F47E0826F7D7AD0033DA0E /* TupleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F47E0726F7D7AD0033DA0E /* TupleTest.swift */; };
 		21F47E0E26F7D94F0033DA0E /* Tuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F47E0D26F7D94F0033DA0E /* Tuple.swift */; };
@@ -99,6 +102,8 @@
 		21B90C042705F48D00A15CB4 /* RendererTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RendererTest.swift; sourceTree = "<group>"; };
 		21B90C062709AE5C00A15CB4 /* ShapeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeTest.swift; sourceTree = "<group>"; };
 		21B90C082709AF3000A15CB4 /* Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
+		21B90C0B2709C0AF00A15CB4 /* PlaneTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaneTest.swift; sourceTree = "<group>"; };
+		21B90C0D2709C14000A15CB4 /* Plane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
 		21F47DF726F7D5F60033DA0E /* Tracer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Tracer; sourceTree = BUILT_PRODUCTS_DIR; };
 		21F47DFA26F7D5F60033DA0E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		21F47E0526F7D7AD0033DA0E /* TracerTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TracerTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -171,6 +176,7 @@
 				21B90BF52703429B00A15CB4 /* Camera.swift */,
 				216AEC4A26FCB1B800BDE837 /* PointLight.swift */,
 				21B90C082709AF3000A15CB4 /* Shape.swift */,
+				21B90C0D2709C14000A15CB4 /* Plane.swift */,
 			);
 			path = scene;
 			sourceTree = "<group>";
@@ -235,6 +241,7 @@
 				21B90BEF27031F3E00A15CB4 /* WorldTest.swift */,
 				21B90C042705F48D00A15CB4 /* RendererTest.swift */,
 				21B90C062709AE5C00A15CB4 /* ShapeTest.swift */,
+				21B90C0B2709C0AF00A15CB4 /* PlaneTest.swift */,
 			);
 			path = test;
 			sourceTree = "<group>";
@@ -337,6 +344,7 @@
 				21B90BFA270396F800A15CB4 /* Material.swift in Sources */,
 				21F47E0E26F7D94F0033DA0E /* Tuple.swift in Sources */,
 				2163F4A826F89BFC00C5B4A9 /* Color.swift in Sources */,
+				21B90C0E2709C14000A15CB4 /* Plane.swift in Sources */,
 				21F47DFB26F7D5F60033DA0E /* main.swift in Sources */,
 				21B90BF62703429B00A15CB4 /* Camera.swift in Sources */,
 				21B90C092709AF3000A15CB4 /* Shape.swift in Sources */,
@@ -365,6 +373,7 @@
 				216AEC2B26FB3B1D00BDE837 /* RayTest.swift in Sources */,
 				216AEC5026FCB31A00BDE837 /* MaterialTest.swift in Sources */,
 				21B90BF42703421400A15CB4 /* CameraTest.swift in Sources */,
+				21B90C0C2709C0AF00A15CB4 /* PlaneTest.swift in Sources */,
 				21B90C052705F48D00A15CB4 /* RendererTest.swift in Sources */,
 				214437CA26F87B9800925AA1 /* Tuple.swift in Sources */,
 				21B90C072709AE5C00A15CB4 /* ShapeTest.swift in Sources */,
@@ -372,6 +381,7 @@
 				216AEC4C26FCB1B800BDE837 /* PointLight.swift in Sources */,
 				21B90BFF2704467700A15CB4 /* Renderer.swift in Sources */,
 				21F47E0826F7D7AD0033DA0E /* TupleTest.swift in Sources */,
+				21B90C0F2709C14000A15CB4 /* Plane.swift in Sources */,
 				21B90BF027031F3E00A15CB4 /* WorldTest.swift in Sources */,
 				21B90BFB270396F800A15CB4 /* Material.swift in Sources */,
 				216AEC3226FB40B500BDE837 /* Sphere.swift in Sources */,
