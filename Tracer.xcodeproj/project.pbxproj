@@ -23,8 +23,6 @@
 		216AEC3126FB40B500BDE837 /* Sphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216AEC3026FB40B500BDE837 /* Sphere.swift */; };
 		216AEC3226FB40B500BDE837 /* Sphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216AEC3026FB40B500BDE837 /* Sphere.swift */; };
 		216AEC3426FB434800BDE837 /* SphereTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216AEC3326FB434800BDE837 /* SphereTest.swift */; };
-		216AEC3926FB552A00BDE837 /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216AEC3826FB552A00BDE837 /* Objects.swift */; };
-		216AEC3A26FB552A00BDE837 /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216AEC3826FB552A00BDE837 /* Objects.swift */; };
 		216AEC3C26FB63E000BDE837 /* Intersection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216AEC3B26FB63E000BDE837 /* Intersection.swift */; };
 		216AEC3D26FB63E000BDE837 /* Intersection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216AEC3B26FB63E000BDE837 /* Intersection.swift */; };
 		216AEC3F26FB645100BDE837 /* IntersectionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216AEC3E26FB645100BDE837 /* IntersectionTest.swift */; };
@@ -50,6 +48,9 @@
 		21B90C02270484A700A15CB4 /* Collider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B90C01270484A700A15CB4 /* Collider.swift */; };
 		21B90C03270484A700A15CB4 /* Collider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B90C01270484A700A15CB4 /* Collider.swift */; };
 		21B90C052705F48D00A15CB4 /* RendererTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B90C042705F48D00A15CB4 /* RendererTest.swift */; };
+		21B90C072709AE5C00A15CB4 /* ShapeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B90C062709AE5C00A15CB4 /* ShapeTest.swift */; };
+		21B90C092709AF3000A15CB4 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B90C082709AF3000A15CB4 /* Shape.swift */; };
+		21B90C0A2709AF3000A15CB4 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B90C082709AF3000A15CB4 /* Shape.swift */; };
 		21F47DFB26F7D5F60033DA0E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F47DFA26F7D5F60033DA0E /* main.swift */; };
 		21F47E0826F7D7AD0033DA0E /* TupleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F47E0726F7D7AD0033DA0E /* TupleTest.swift */; };
 		21F47E0E26F7D94F0033DA0E /* Tuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F47E0D26F7D94F0033DA0E /* Tuple.swift */; };
@@ -78,7 +79,6 @@
 		216AEC2C26FB3BB800BDE837 /* Ray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ray.swift; sourceTree = "<group>"; };
 		216AEC3026FB40B500BDE837 /* Sphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sphere.swift; sourceTree = "<group>"; };
 		216AEC3326FB434800BDE837 /* SphereTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereTest.swift; sourceTree = "<group>"; };
-		216AEC3826FB552A00BDE837 /* Objects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Objects.swift; sourceTree = "<group>"; };
 		216AEC3B26FB63E000BDE837 /* Intersection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intersection.swift; sourceTree = "<group>"; };
 		216AEC3E26FB645100BDE837 /* IntersectionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntersectionTest.swift; sourceTree = "<group>"; };
 		216AEC4026FC60E100BDE837 /* MiscTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MiscTest.swift; path = test/MiscTest.swift; sourceTree = SOURCE_ROOT; };
@@ -97,6 +97,8 @@
 		21B90BFD2704467700A15CB4 /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 		21B90C01270484A700A15CB4 /* Collider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collider.swift; sourceTree = "<group>"; };
 		21B90C042705F48D00A15CB4 /* RendererTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RendererTest.swift; sourceTree = "<group>"; };
+		21B90C062709AE5C00A15CB4 /* ShapeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeTest.swift; sourceTree = "<group>"; };
+		21B90C082709AF3000A15CB4 /* Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
 		21F47DF726F7D5F60033DA0E /* Tracer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Tracer; sourceTree = BUILT_PRODUCTS_DIR; };
 		21F47DFA26F7D5F60033DA0E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		21F47E0526F7D7AD0033DA0E /* TracerTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TracerTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -165,10 +167,10 @@
 			children = (
 				216AEC3026FB40B500BDE837 /* Sphere.swift */,
 				216AEC2C26FB3BB800BDE837 /* Ray.swift */,
-				216AEC3826FB552A00BDE837 /* Objects.swift */,
 				21B90BED27031F2100A15CB4 /* World.swift */,
 				21B90BF52703429B00A15CB4 /* Camera.swift */,
 				216AEC4A26FCB1B800BDE837 /* PointLight.swift */,
+				21B90C082709AF3000A15CB4 /* Shape.swift */,
 			);
 			path = scene;
 			sourceTree = "<group>";
@@ -232,6 +234,7 @@
 				21F47E0726F7D7AD0033DA0E /* TupleTest.swift */,
 				21B90BEF27031F3E00A15CB4 /* WorldTest.swift */,
 				21B90C042705F48D00A15CB4 /* RendererTest.swift */,
+				21B90C062709AE5C00A15CB4 /* ShapeTest.swift */,
 			);
 			path = test;
 			sourceTree = "<group>";
@@ -326,7 +329,6 @@
 			files = (
 				21B90BFE2704467700A15CB4 /* Renderer.swift in Sources */,
 				216AEC4B26FCB1B800BDE837 /* PointLight.swift in Sources */,
-				216AEC3926FB552A00BDE837 /* Objects.swift in Sources */,
 				216AEC3C26FB63E000BDE837 /* Intersection.swift in Sources */,
 				216AEC2D26FB3BB800BDE837 /* Ray.swift in Sources */,
 				216AEC3126FB40B500BDE837 /* Sphere.swift in Sources */,
@@ -337,6 +339,7 @@
 				2163F4A826F89BFC00C5B4A9 /* Color.swift in Sources */,
 				21F47DFB26F7D5F60033DA0E /* main.swift in Sources */,
 				21B90BF62703429B00A15CB4 /* Camera.swift in Sources */,
+				21B90C092709AF3000A15CB4 /* Shape.swift in Sources */,
 				2163F4A626F88CC600C5B4A9 /* chap1.swift in Sources */,
 				21B90BEE27031F2100A15CB4 /* World.swift in Sources */,
 				21B90C02270484A700A15CB4 /* Collider.swift in Sources */,
@@ -354,6 +357,7 @@
 				216AEC4626FC8B3D00BDE837 /* Matrix4ArichtmeticTest.swift in Sources */,
 				216AEC4126FC60E100BDE837 /* MiscTest.swift in Sources */,
 				216AEC4426FC665900BDE837 /* Matrix4.swift in Sources */,
+				21B90C0A2709AF3000A15CB4 /* Shape.swift in Sources */,
 				21B90BF127031F4100A15CB4 /* World.swift in Sources */,
 				216AEC3426FB434800BDE837 /* SphereTest.swift in Sources */,
 				2163F4AE26F8A17A00C5B4A9 /* ColorTest.swift in Sources */,
@@ -363,6 +367,7 @@
 				21B90BF42703421400A15CB4 /* CameraTest.swift in Sources */,
 				21B90C052705F48D00A15CB4 /* RendererTest.swift in Sources */,
 				214437CA26F87B9800925AA1 /* Tuple.swift in Sources */,
+				21B90C072709AE5C00A15CB4 /* ShapeTest.swift in Sources */,
 				216AEC4E26FCB1C900BDE837 /* PointLightTest.swift in Sources */,
 				216AEC4C26FCB1B800BDE837 /* PointLight.swift in Sources */,
 				21B90BFF2704467700A15CB4 /* Renderer.swift in Sources */,
@@ -370,7 +375,6 @@
 				21B90BF027031F3E00A15CB4 /* WorldTest.swift in Sources */,
 				21B90BFB270396F800A15CB4 /* Material.swift in Sources */,
 				216AEC3226FB40B500BDE837 /* Sphere.swift in Sources */,
-				216AEC3A26FB552A00BDE837 /* Objects.swift in Sources */,
 				216AEC2E26FB3BB800BDE837 /* Ray.swift in Sources */,
 				21B90C03270484A700A15CB4 /* Collider.swift in Sources */,
 				216AEC3F26FB645100BDE837 /* IntersectionTest.swift in Sources */,

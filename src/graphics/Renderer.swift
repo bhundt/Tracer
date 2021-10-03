@@ -118,7 +118,7 @@ class Renderer {
         // FIX: as! PointLight
         // FIX: multiple lights
         let shadowed = Renderer.isPointInShadow(world: world, point: comps.overPoint)
-        return (comps.object as! ShadeableObject).material.lighting(light: world.lights[0] as! PointLight, position: comps.point, eyeVec: comps.eyeVec, normalVec: comps.normalVec, inShadow: shadowed)
+        return comps.object.material.lighting(light: world.lights[0] as! PointLight, position: comps.point, eyeVec: comps.eyeVec, normalVec: comps.normalVec, inShadow: shadowed)
     }
     
     /// Helper to determine whether a point in the scene is in shadow

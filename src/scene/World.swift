@@ -7,8 +7,14 @@
 
 import Foundation
 
+/// This protocol represents any object in the world which needs to be uniquely identified
+protocol IdentifiableObject {
+    var uniqueId: UUID { get }
+}
+
+
 class World {
-    var objects: [IdentifiableObject & CollidableObject & ShadeableObject] = []
+    var objects: [IdentifiableObject & Shape] = []
     var lights: [IdentifiableObject] = []
     
     static func makeDefaultWorld() -> World {

@@ -85,8 +85,9 @@ func chapFivePlaygroundOne() {
                                                   z: -1),
                           direction: Tuple.makeVector(x: 0, y: 0, z: 1))
             //let xs = ray.intersect(sphere: s)
-            let xs = Collider.intersect(ray: ray, withSphere: s)
-            let hits = [xs.0!, xs.1!].hit()
+            //let xs = Collider.intersect(ray: ray, withSphere: s)
+            let xs = s.intersect(withRay: ray)
+            let hits = xs.hit()
 
             if hits != nil {
                 print("HIT! x: \(w) y: \(h)")
@@ -127,9 +128,8 @@ func chapFivePlaygroundTwo() {
             let worldX = -half + pixelSize * Double(x)
             let position = Tuple.makePoint(x: worldX, y: worldY, z: wallZ)
             let r = Ray(origin: rayOrigin, direction: (position-rayOrigin).normalized)
-            //let xs = r.intersect(sphere: shape)
-            let xs = Collider.intersect(ray: r, withSphere: shape)
-            if [xs.0!, xs.1!].hit() != nil {
+            let xs = shape.intersect(withRay: r)
+            if xs.hit() != nil {
                 canvas[x, y] = color
             }
             
@@ -189,11 +189,12 @@ func chapSixPlayground() {
             let r = Ray(origin: rayOrigin, direction: (position-rayOrigin).normalized)
             
             //let xs = r.intersect(sphere: shape)
-            let xs = Collider.intersect(ray: r, withSphere: shape)
-            if  let hit = [xs.0!, xs.1!].hit() {
+            //let xs = Collider.intersect(ray: r, withSphere: shape)
+            let xs = shape.intersect(withRay: r)
+            if  let hit = xs.hit() {
                 let hitSphere = hit.object as! Sphere
                 let point = r.position(t: hit.t)
-                let normal = hitSphere.normal(at: point)
+                let normal = hitSphere.normalVec(atPoint: point)
                 let eye = -(r.direction)
                 
                 canvas[x, y] = hitSphere.material.lighting(light: light, position: point, eyeVec: eye, normalVec: normal, inShadow: false) //+ hitSphere.material.lighting(light: light2, position: point, eyeVec: eye, normalVec: normal)

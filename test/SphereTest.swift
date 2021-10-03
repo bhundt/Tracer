@@ -15,53 +15,38 @@ class SphereTest: XCTestCase {
         XCTAssertNotEqual(s1, s2)
     }
     
-    // p. 69
-    func testSphereHasDefaultTrafo() throws {
-        let s = Sphere()
-        XCTAssertEqual(s.transform, Matrix4.makeIdentity())
-    }
-    
-    // p. 69
-    func testSphereCanChangeTrafo() throws {
-        let s = Sphere()
-        let t = Matrix4.makeTranslation(x: 2, y: 3, z: 4)
-        s.transform = t
-        
-        XCTAssertEqual(s.transform, t)
-    }
-    
     // p. 78
     func testNormalOnSphereAtX() throws {
         let s = Sphere()
-        let n = s.normal(at: Tuple.makePoint(x: 1, y: 0, z: 0))
+        let n = s.localNormal(atPoint: Tuple.makePoint(x: 1, y: 0, z: 0))
         XCTAssertEqual(n, Tuple.makeVector(x: 1, y: 0, z: 0))
     }
     
     // p. 78
     func testNormalOnSphereAtY() throws {
         let s = Sphere()
-        let n = s.normal(at: Tuple.makePoint(x: 0, y: 1, z: 0))
+        let n = s.localNormal(atPoint: Tuple.makePoint(x: 0, y: 1, z: 0))
         XCTAssertEqual(n, Tuple.makeVector(x: 0, y: 1, z: 0))
     }
     
     // p. 78
     func testNormalOnSphereAtZ() throws {
         let s = Sphere()
-        let n = s.normal(at: Tuple.makePoint(x: 0, y: 0, z: 1))
+        let n = s.localNormal(atPoint: Tuple.makePoint(x: 0, y: 0, z: 1))
         XCTAssertEqual(n, Tuple.makeVector(x: 0, y: 0, z: 1))
     }
     
     // p. 78
     func testNormalOnSphereAtOtherPoint() throws {
         let s = Sphere()
-        let n = s.normal(at: Tuple.makePoint(x: 3.0.squareRoot()/3, y: 3.0.squareRoot()/3, z: 3.0.squareRoot()/3))
+        let n = s.localNormal(atPoint: Tuple.makePoint(x: 3.0.squareRoot()/3, y: 3.0.squareRoot()/3, z: 3.0.squareRoot()/3))
         XCTAssertEqual(n, Tuple.makeVector(x: 3.0.squareRoot()/3, y: 3.0.squareRoot()/3, z: 3.0.squareRoot()/3))
     }
     
     // p. 78
     func testNormalIsNormalized() throws {
         let s = Sphere()
-        let n = s.normal(at: Tuple.makePoint(x: 3.0.squareRoot()/3, y: 3.0.squareRoot()/3, z: 3.0.squareRoot()/3))
+        let n = s.localNormal(atPoint: Tuple.makePoint(x: 3.0.squareRoot()/3, y: 3.0.squareRoot()/3, z: 3.0.squareRoot()/3))
         XCTAssertEqual(n, Tuple.makeVector(x: 3.0.squareRoot()/3, y: 3.0.squareRoot()/3, z: 3.0.squareRoot()/3).normalized)
     }
     
@@ -70,7 +55,7 @@ class SphereTest: XCTestCase {
         let s = Sphere()
         s.transform = Matrix4.makeTranslation(x: 0, y: 1, z: 0)
         
-        let n = s.normal(at: Tuple.makePoint(x: 0, y: 1.70711, z: -0.70711))
+        let n = s.normalVec(atPoint: Tuple.makePoint(x: 0, y: 1.70711, z: -0.70711))
         XCTAssertEqual(n, Tuple.makeVector(x: 0, y: 0.70711, z: -0.70711))
     }
     
@@ -81,22 +66,13 @@ class SphereTest: XCTestCase {
             .rotateZ(radians: Double.pi/5)
             .scale(x: 1, y: 0.5, z: 1)
         
-        let n = s.normal(at: Tuple.makePoint(x: 0, y: 2.0.squareRoot()/2, z: -2.0.squareRoot()/2))
+        let n = s.normalVec(atPoint: Tuple.makePoint(x: 0, y: 2.0.squareRoot()/2, z: -2.0.squareRoot()/2))
         XCTAssertEqual(n, Tuple.makeVector(x: 0, y: 0.97014, z: -0.24254))
     }
     
-    // p. 85
-    func testSphereHasMaterial() throws {
+    // p. 121
+    func testSphereConformsToShapeProtocol() throws {
         let s = Sphere()
-        let _ = s.material
-    }
-    
-    // p. 85
-    func testSphereCanBeAssignedAMaterial() throws {
-        let s = Sphere()
-        var m = Material()
-        m.ambient = 1.0
-        s.material = m
-        XCTAssertEqual(s.material, m)
+        let _ = s as Shape
     }
 }
