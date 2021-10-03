@@ -114,4 +114,17 @@ class IntersectionTest: XCTestCase {
         XCTAssertEqual(comps.normalVec, Tuple.makeVector(x: 0, y: 0, z: -1))
         XCTAssertTrue(comps.inside)
     }
+    
+    // p. 115
+    func testHitShouldOffsetThePoint() throws {
+        let r = Ray(origin: Tuple.makePoint(x: 0, y: 0, z: -5), direction: Tuple.makeVector(x: 0, y: 0, z: 1))
+        let shape = Sphere()
+        shape.transform = Matrix4.makeTranslation(x: 0, y: 0, z: 1)
+        
+        let i = Intersection(t: 5.0, obj: shape)
+        let comps = i.prepareComputation(ray: r)
+        
+        XCTAssertLessThan(comps.overPoint.z, -COMPARE_EPSILON/2)
+        XCTAssertGreaterThan(comps.point.z, comps.overPoint.z)
+    }
 }

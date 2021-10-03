@@ -45,7 +45,9 @@ class WorldTest: XCTestCase {
         let w = World.makeDefaultWorld()
         let ray = Ray(origin: Tuple.makePoint(x: 0, y: 0, z: -5), direction: Tuple.makeVector(x: 0, y: 0, z: 1))
         
-        let xs = ray.intersect(world: w)
+        //let xs = ray.intersect(world: w)
+        let xs = Collider.intersect(ray: ray, withWorld: w)
+        
         XCTAssertEqual(xs.count, 4)
         XCTAssertEqual(xs[0].t, 4.0)
         XCTAssertEqual(xs[1].t, 4.5)
@@ -53,60 +55,26 @@ class WorldTest: XCTestCase {
         XCTAssertEqual(xs[3].t, 6.0)
     }
     
-    // p. 95
-    func testShadeIntersection() throws {
-        let w = World.makeDefaultWorld()
-        let ray = Ray(origin: Tuple.makePoint(x: 0, y: 0, z: -5), direction: Tuple.makeVector(x: 0, y: 0, z: 1))
-        let shape = w.objects[0]
-        let i = Intersection(t: 4.0, obj: shape)
-        
-        let comps = i.prepareComputation(ray: ray)
-        let c = w.shadeHit(comps: comps)
-        
-        XCTAssertEqual(c, Color(red: 0.38066, green: 0.47583, blue: 0.2855))
-    }
     
-    // p. 95
-    func testShadeIntersectionFromInside() throws {
-        let w = World.makeDefaultWorld()
-        let ray = Ray(origin: Tuple.makePoint(x: 0, y: 0, z: 0), direction: Tuple.makeVector(x: 0, y: 0, z: 1))
-        w.lights[0] = PointLight(position: Tuple.makePoint(x: 0, y: 0.25, z: 0), color: Color(red: 1, green: 1, blue: 1))
-        let shape = w.objects[1]
-        let i = Intersection(t: 0.5, obj: shape)
-        
-        let comps = i.prepareComputation(ray: ray)
-        let c = w.shadeHit(comps: comps)
-        
-        XCTAssertEqual(c, Color(red: 0.90498, green: 0.90498, blue: 0.90498))
-    }
     
-    // p. 96
-    func testColorRayMisses() throws {
-        let w = World.makeDefaultWorld()
-        let r = Ray(origin: Tuple.makePoint(x: 0, y: 0, z: -5), direction: Tuple.makeVector(x: 0, y: 1, z: 0))
+    // p. 114
+    func testShadeHitIsGivenIntersectionInShadow() throws {
+        let w = World()
+        w.lights.append( PointLight(position: Tuple.makePoint(x: 0, y: 0, z: -16), color: Color(red: 1, green: 1, blue: 1)) )
         
-        let c = w.colorAt(ray: r)
-        XCTAssertEqual(c, Color(red: 0, green: 0, blue: 0))
-    }
-    
-    // p. 96
-    func testColorRayHits() throws {
-        let w = World.makeDefaultWorld()
-        let r = Ray(origin: Tuple.makePoint(x: 0, y: 0, z: -5), direction: Tuple.makeVector(x: 0, y: 0, z: 1))
+        let s1 = Sphere()
+        w.objects.append(s1)
         
-        let c = w.colorAt(ray: r)
-        XCTAssertEqual(c, Color(red: 0.38066, green: 0.47583, blue: 0.2855))
-    }
-    
-    // p. 97
-    func testColorWithIntersectionBehindRay() throws {
-        let w = World.makeDefaultWorld()
-        w.objects[0].material.ambient = 1.0
-        w.objects[1].material.ambient = 1.0
+        let s2 = Sphere()
+        s2.transform = Matrix4.makeTranslation(x: 0, y: 0, z: 10)
+        w.objects.append(s2)
         
-        let r = Ray(origin: Tuple.makePoint(x: 0, y: 0, z: 0.75), direction: Tuple.makeVector(x: 0, y: 0, z: -1))
+        let r = Ray(origin: Tuple.makePoint(x: 0, y: 0, z: 5), direction: Tuple.makeVector(x: 0, y: 0, z: 1))
+        let i = Intersection(t: 4.0, obj: s2)
         
-        let c = w.colorAt(ray: r)
-        XCTAssertEqual(c, w.objects[1].material.color)
+        let comps = i.prepareComputation(ray: r)
+        let c = Renderer.shadeHit(comps: comps, world:w)
+        
+        XCTAssertEqual(c, Color(red: 0.1, green: 0.1, blue: 0.1))        
     }
 }

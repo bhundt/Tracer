@@ -20,8 +20,18 @@ struct Tuple: TupleProtocol {
         self.w = w
     }
     
-    var isPoint: Bool { get {return w == 1.0} }
-    var isVector: Bool { get {return w == 0.0} }
+    var isPoint: Bool {
+        get {
+            return fabs(w - 1.0) < COMPARE_EPSILON
+            
+        }
+    }
+    var isVector: Bool {
+        get {
+            return fabs(w - 0.0) < COMPARE_EPSILON
+            
+        }
+    }
     
     var normalized: Tuple { get {return getNormalized()} }
     

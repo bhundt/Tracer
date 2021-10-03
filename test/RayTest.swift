@@ -33,7 +33,7 @@ class RayTest: XCTestCase {
                     direction: Tuple.makeVector(x: 0, y: 0, z: 1))
         let s = Sphere()
         
-        let xs = r.intersect(sphere: s)
+        let xs = s.intersect(withRay: r)
         
         XCTAssertEqual(xs.count, 2)
         XCTAssertEqual(xs[0].t, 4.0)
@@ -46,8 +46,7 @@ class RayTest: XCTestCase {
                     direction: Tuple.makeVector(x: 0, y: 0, z: 1))
         let s = Sphere()
         
-        let xs = r.intersect(sphere: s)
-        
+        let xs = s.intersect(withRay: r)
         XCTAssertEqual(xs.count, 2)
         XCTAssertEqual(xs[0].t, 5.0)
         XCTAssertEqual(xs[1].t, 5.0)
@@ -59,7 +58,7 @@ class RayTest: XCTestCase {
                     direction: Tuple.makeVector(x: 0, y: 0, z: 1))
         let s = Sphere()
         
-        let xs = r.intersect(sphere: s)
+        let xs = s.intersect(withRay: r)
         
         XCTAssertEqual(xs.count, 0)
     }
@@ -70,7 +69,7 @@ class RayTest: XCTestCase {
                     direction: Tuple.makeVector(x: 0, y: 0, z: 1))
         let s = Sphere()
         
-        let xs = r.intersect(sphere: s)
+        let xs = s.intersect(withRay: r)
         
         XCTAssertEqual(xs.count, 2)
         XCTAssertEqual(xs[0].t, -1.0)
@@ -83,7 +82,7 @@ class RayTest: XCTestCase {
                     direction: Tuple.makeVector(x: 0, y: 0, z: 1))
         let s = Sphere()
         
-        let xs = r.intersect(sphere: s)
+        let xs = s.intersect(withRay: r)
         
         XCTAssertEqual(xs.count, 2)
         XCTAssertEqual(xs[0].t, -6.0)
@@ -96,9 +95,11 @@ class RayTest: XCTestCase {
                     direction: Tuple.makeVector(x: 0, y: 0, z: 1))
         let s = Sphere()
         
-        let xs = r.intersect(sphere: s)
+        let xs = s.intersect(withRay: r)
         
         XCTAssertEqual(xs.count, 2)
+        XCTAssertNotNil(xs[0])
+        XCTAssertNotNil(xs[1])
         XCTAssertEqual(xs[0].object as! Sphere, s)
         XCTAssertEqual(xs[1].object as! Sphere, s)
     }
@@ -133,9 +134,10 @@ class RayTest: XCTestCase {
                     direction: Tuple.makeVector(x: 0, y: 0, z: 1))
         
         let s = Sphere(trafo: Matrix4.makeScaling(x: 2, y: 2, z: 2))
-        let xs = r.intersect(sphere: s)
+        let xs = s.intersect(withRay: r)
         
-        XCTAssertEqual(xs.count, 2)
+        XCTAssertNotNil(xs[0])
+        XCTAssertNotNil(xs[1])
         XCTAssertEqual(xs[0].t, 3)
         XCTAssertEqual(xs[1].t, 7)
     }
@@ -146,7 +148,7 @@ class RayTest: XCTestCase {
                     direction: Tuple.makeVector(x: 0, y: 0, z: 1))
         
         let s = Sphere(trafo: Matrix4.makeTranslation(x: 5, y: 0, z: 0))
-        let xs = r.intersect(sphere: s)
+        let xs = s.intersect(withRay: r)
         
         XCTAssertEqual(xs.count, 0)
     }

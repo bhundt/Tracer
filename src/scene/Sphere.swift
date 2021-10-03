@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Sphere: CollidableObject, IdentifiableObject, ShadeableObject, Equatable {
+class Sphere: Shape, IdentifiableObject, Equatable {
     private var _id: UUID
     var uniqueId: UUID { get{ return _id } }
     
@@ -32,12 +32,27 @@ class Sphere: CollidableObject, IdentifiableObject, ShadeableObject, Equatable {
         transform = trafo
     }
     
-    func normal(at: Tuple) -> Tuple {
-        let objectPoint = transform.inversed * at
-        let objectNormal = objectPoint - Tuple.makePoint(x: 0, y: 0, z: 0)
-        var worldNormal = transform.inversed.transposed * objectNormal
-        worldNormal.w = 0.0
-        return worldNormal.normalized
+    func localIntersect(withRay ray: Ray) -> [Intersection] {
+        let sphereToRay = ray.origin - Tuple.makePoint(x: 0, y: 0, z: 0)
+        let a = ray.direction.dot(withVector: ray.direction)
+        let b = 2 * ray.direction.dot(withVector: sphereToRay)
+        let c = sphereToRay.dot(withVector: sphereToRay) - 1
+        let dsc = pow(b, 2.0) - 4 * a * c
+        
+        if dsc < 0 {
+            return []
+        }
+        
+        let t1 = (-b - dsc.squareRoot()) / (2 * a)
+        let t2 = (-b + dsc.squareRoot()) / (2 * a)
+        
+        return [Intersection(t: t1, obj: self), Intersection(t: t2, obj: self)]
+    }
+    
+    func localNormal(atPoint point: Tuple) -> Tuple {
+        var objectNormal = point - Tuple.makePoint(x: 0, y: 0, z: 0)
+        objectNormal.w = 0
+        return objectNormal.normalized
     }
     
     static func == (lhs: Sphere, rhs: Sphere) -> Bool {

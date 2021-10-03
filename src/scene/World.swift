@@ -7,25 +7,15 @@
 
 import Foundation
 
+/// This protocol represents any object in the world which needs to be uniquely identified
+protocol IdentifiableObject {
+    var uniqueId: UUID { get }
+}
+
+
 class World {
-    var objects: [IdentifiableObject & CollidableObject & ShadeableObject] = []
+    var objects: [IdentifiableObject & Shape] = []
     var lights: [IdentifiableObject] = []
-    
-    func shadeHit(comps: ShadingHelperData) -> Color {
-        // FIX: as! PointLight
-        return (comps.object as! ShadeableObject).material.lighting(light: self.lights[0] as! PointLight, position: comps.point, eyeVec: comps.eyeVec, normalVec: comps.normalVec)
-    }
-    
-    func colorAt(ray: Ray) -> Color {
-        let intersections = ray.intersect(world: self)
-        
-        if let i = intersections.hit() {
-            let comps = i.prepareComputation(ray: ray)
-            return shadeHit(comps: comps)
-        } else {
-            return Color(red: 0, green: 0, blue: 0)
-        }
-    }
     
     static func makeDefaultWorld() -> World {
         let w = World()

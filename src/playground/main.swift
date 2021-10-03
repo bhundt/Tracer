@@ -84,7 +84,9 @@ func chapFivePlaygroundOne() {
                                                   y: Double(h),
                                                   z: -1),
                           direction: Tuple.makeVector(x: 0, y: 0, z: 1))
-            let xs = ray.intersect(sphere: s)
+            //let xs = ray.intersect(sphere: s)
+            //let xs = Collider.intersect(ray: ray, withSphere: s)
+            let xs = s.intersect(withRay: ray)
             let hits = xs.hit()
 
             if hits != nil {
@@ -126,7 +128,7 @@ func chapFivePlaygroundTwo() {
             let worldX = -half + pixelSize * Double(x)
             let position = Tuple.makePoint(x: worldX, y: worldY, z: wallZ)
             let r = Ray(origin: rayOrigin, direction: (position-rayOrigin).normalized)
-            let xs = r.intersect(sphere: shape)
+            let xs = shape.intersect(withRay: r)
             if xs.hit() != nil {
                 canvas[x, y] = color
             }
@@ -186,14 +188,16 @@ func chapSixPlayground() {
             let position = Tuple.makePoint(x: worldX, y: worldY, z: wallZ)
             let r = Ray(origin: rayOrigin, direction: (position-rayOrigin).normalized)
             
-            let xs = r.intersect(sphere: shape)
+            //let xs = r.intersect(sphere: shape)
+            //let xs = Collider.intersect(ray: r, withSphere: shape)
+            let xs = shape.intersect(withRay: r)
             if  let hit = xs.hit() {
                 let hitSphere = hit.object as! Sphere
                 let point = r.position(t: hit.t)
-                let normal = hitSphere.normal(at: point)
+                let normal = hitSphere.normalVec(atPoint: point)
                 let eye = -(r.direction)
                 
-                canvas[x, y] = hitSphere.material.lighting(light: light, position: point, eyeVec: eye, normalVec: normal) //+ hitSphere.material.lighting(light: light2, position: point, eyeVec: eye, normalVec: normal)
+                canvas[x, y] = hitSphere.material.lighting(light: light, position: point, eyeVec: eye, normalVec: normal, inShadow: false) //+ hitSphere.material.lighting(light: light2, position: point, eyeVec: eye, normalVec: normal)
             }
             
         }
@@ -215,16 +219,18 @@ func chapSixPlayground() {
 func chapSevenPlayground() {
     let floor = Sphere()
     floor.transform = Matrix4.makeScaling(x: 10, y: 0.01, z: 10)
-    floor.material.color = Color(red: 0.2, green: 0.3, blue: 0.7)
+    floor.material.color = Color(red: 0.9, green: 0.9, blue: 0.9)
     floor.material.specular = 0
+    floor.material.ambient = 0.2
     
     let leftWall = Sphere()
     leftWall.transform = Matrix4.makeScaling(x: 10, y: 0.01, z: 10).rotateX(radians: Double.pi/2).rotateY(radians: -Double.pi/4).translate(x: 0, y: 0, z: 5)
-    leftWall.material.color = Color(red: 0.4, green: 0.5, blue: 0.85)
+    leftWall.material.color = Color(red: 0.9, green: 0.9, blue: 0.9)
+    leftWall.material.ambient = 0.7
     
     let rightWall = Sphere()
     rightWall.transform = Matrix4.makeScaling(x: 10, y: 0.01, z: 10).rotateX(radians: Double.pi/2).rotateY(radians: Double.pi/4).translate(x: 0, y: 0, z: 5)
-    rightWall.material.color = Color(red: 0.4, green: 0.5, blue: 0.85)
+    rightWall.material.color = Color(red: 0.7, green: 0.7, blue: 0.85)
     
     let middle = Sphere()
     middle.transform = Matrix4.makeTranslation(x: -0.5, y: 1, z: 0.5)
@@ -246,16 +252,11 @@ func chapSevenPlayground() {
     
     let light = PointLight(position: Tuple.makePoint(x: -10, y: 10, z: -10), color: Color(red: 1, green: 1, blue: 1))
     
-    let camera = Camera(horizontalSize: 1000, verticalSize: 500, fov: Double.pi/3)
-    camera.transform = Matrix4.makeviewTransform(from: Tuple.makePoint(x: 0, y: 1.5, z: -5), to: Tuple.makePoint(x: 0, y: 1, z: 0), up: Tuple.makeVector(x: 0, y: 1, z: 0))
+    let camera = Camera(horizontalSize: 1920, verticalSize: 1080, fov: Double.pi/3)
+    camera.transform = Matrix4.makeviewTransform(from: Tuple.makePoint(x: 0, y: 1.5, z: -5), to: Tuple.makePoint(x: 0, y: 1, z: 0), up: Tuple.makeVector(x: 0, y: 1, z: 0)).rotateY(radians: Double.pi/32)
     
     let w = World()
-    w.objects.append(middle)
-    w.objects.append(left)
-    w.objects.append(right)
-    w.objects.append(leftWall)
-    w.objects.append(rightWall)
-    w.objects.append(floor)
+    w.objects.append(contentsOf: [middle, left, right, leftWall, rightWall, floor])
     w.lights.append(light)
     
     let canvas = Renderer.render(camera: camera, world: w)
@@ -269,9 +270,56 @@ func chapSevenPlayground() {
     catch {}
 }
 
+func chapEightPlayground() {
+    let floor = Plane()
+    floor.material.color = Color(red: 0.9, green: 0.9, blue: 0.9)
+    floor.material.specular = 0
+    floor.material.ambient = 0.2
+    
+    let middle = Sphere()
+    middle.transform = Matrix4.makeTranslation(x: -0.5, y: 1, z: 0.5)
+    middle.material.color = Color(red: 0.1, green: 1, blue: 0.5)
+    middle.material.diffuse = 0.7
+    middle.material.specular = 0.3
+    
+    let right = Sphere()
+    right.transform = Matrix4.makeTranslation(x: 1.5, y: 0.5, z: -0.5) * Matrix4.makeScaling(x: 0.5, y: 0.5, z: 0.5)
+    right.material.color = Color(red: 0.5, green: 1, blue: 0.1)
+    right.material.diffuse = 0.7
+    right.material.specular = 0.3
+    
+    let left = Sphere()
+    left.transform = Matrix4.makeTranslation(x: -1.5, y: 0.33, z: -0.75) * Matrix4.makeScaling(x: 0.33, y: 0.33, z: 0.33)
+    left.material.color = Color(red: 1, green: 0.8, blue: 0.1)
+    left.material.diffuse = 0.7
+    left.material.specular = 0.3
+    
+    let light = PointLight(position: Tuple.makePoint(x: -10, y: 10, z: -10), color: Color(red: 1, green: 1, blue: 1))
+    
+    let camera = Camera(horizontalSize: 480*2, verticalSize: 270*2, fov: Double.pi/3)
+    camera.transform = Matrix4.makeviewTransform(from: Tuple.makePoint(x: 0, y: 1.5, z: -5), to: Tuple.makePoint(x: 0, y: 1, z: 0), up: Tuple.makeVector(x: 0, y: 1, z: 0))//.rotateY(radians: Double.pi/32)
+    
+    let w = World()
+    w.objects.append(contentsOf: [middle, left, right])
+    w.objects.append(floor)
+    w.lights.append(light)
+    
+    let canvas = Renderer.render(camera: camera, world: w)
+    
+    let ppm = canvas.toPortablePixMap()
+    do {
+        let path = FileManager.default.urls(for: .documentDirectory,
+                                            in:.userDomainMask)[0].appendingPathComponent("scene_plane.ppm")
+        try ppm.write(to: path, atomically: false, encoding: .utf8)
+    }
+    catch {}
+}
+
+
 //chapOnePlayground()
 //chapTwoPlayground()
 //chapThreePlayground()
 //chapFivePlaygroundTwo()
 //chapSixPlayground()
-chapSevenPlayground()
+//chapSevenPlayground()
+chapEightPlayground()

@@ -8,6 +8,7 @@
 import Foundation
 import simd
 
+// TODO: cache inverse and transposed?
 struct Matrix4: Equatable {
     var m: simd_double4x4 = simd_double4x4(0.0)
     
