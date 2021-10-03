@@ -218,16 +218,18 @@ func chapSixPlayground() {
 func chapSevenPlayground() {
     let floor = Sphere()
     floor.transform = Matrix4.makeScaling(x: 10, y: 0.01, z: 10)
-    floor.material.color = Color(red: 0.2, green: 0.3, blue: 0.7)
+    floor.material.color = Color(red: 0.9, green: 0.9, blue: 0.9)
     floor.material.specular = 0
+    floor.material.ambient = 0.2
     
     let leftWall = Sphere()
     leftWall.transform = Matrix4.makeScaling(x: 10, y: 0.01, z: 10).rotateX(radians: Double.pi/2).rotateY(radians: -Double.pi/4).translate(x: 0, y: 0, z: 5)
-    leftWall.material.color = Color(red: 0.4, green: 0.5, blue: 0.85)
+    leftWall.material.color = Color(red: 0.9, green: 0.9, blue: 0.9)
+    leftWall.material.ambient = 0.7
     
     let rightWall = Sphere()
     rightWall.transform = Matrix4.makeScaling(x: 10, y: 0.01, z: 10).rotateX(radians: Double.pi/2).rotateY(radians: Double.pi/4).translate(x: 0, y: 0, z: 5)
-    rightWall.material.color = Color(red: 0.4, green: 0.5, blue: 0.85)
+    rightWall.material.color = Color(red: 0.7, green: 0.7, blue: 0.85)
     
     let middle = Sphere()
     middle.transform = Matrix4.makeTranslation(x: -0.5, y: 1, z: 0.5)
@@ -249,7 +251,7 @@ func chapSevenPlayground() {
     
     let light = PointLight(position: Tuple.makePoint(x: -10, y: 10, z: -10), color: Color(red: 1, green: 1, blue: 1))
     
-    let camera = Camera(horizontalSize: 250*4, verticalSize: 125*4, fov: Double.pi/3)
+    let camera = Camera(horizontalSize: 1920, verticalSize: 1080, fov: Double.pi/3)
     camera.transform = Matrix4.makeviewTransform(from: Tuple.makePoint(x: 0, y: 1.5, z: -5), to: Tuple.makePoint(x: 0, y: 1, z: 0), up: Tuple.makeVector(x: 0, y: 1, z: 0)).rotateY(radians: Double.pi/32)
     
     let w = World()

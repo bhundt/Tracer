@@ -27,9 +27,9 @@ class Collider {
         return (Intersection(t: t1, obj: withSphere), Intersection(t: t2, obj: withSphere))
     }
     
-    static func intersect(ray: Ray, withWorld: World) -> [Intersection] {
+    static func intersect(ray: Ray, withWorld world: World) -> [Intersection] {
         var intersections: [Intersection] = []
-        for obj in withWorld.objects {
+        for obj in world.objects {
             switch obj {
                 case let sphere as Sphere:
                     let (i1, i2) = self.intersect(ray: ray, withSphere: sphere)
@@ -58,10 +58,7 @@ extension Array where Element == Intersection {
     /// Finds the nearest hit from the ray. Nearest means smallest, non-negative t-value
     func hit() -> Intersection? {
         let hits = self.sorted().filter({ elem in elem.t >= 0.0 })
-        if hits.count > 0 {
-            return hits.first
-        }
-        return nil
+        return hits.first
     }
 
 }
