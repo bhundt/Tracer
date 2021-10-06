@@ -17,11 +17,24 @@ class World {
     var objects: [IdentifiableObject & Shape] = []
     var lights: [IdentifiableObject] = []
     
+    func intersect(withRay ray: Ray) -> [Intersection] {
+        var intersections: [Intersection] = []
+        for obj in objects {
+            intersections.append(contentsOf: obj.intersect(withRay: ray))
+        }
+        
+        // only sort when we have more than one intersection since sorted is rather expensive
+        if intersections.count > 1 {
+            intersections.sort()
+        }
+        return intersections
+    }
+    
     static func makeDefaultWorld() -> World {
         let w = World()
         let light = PointLight(position: Tuple.makePoint(x: -10, y: 10, z: -10), color: Color(red: 1, green: 1, blue: 1))
         
-        let s1 = Sphere()
+        var s1 = Sphere()
         s1.material.color = Color(red: 0.8, green: 1.0, blue: 0.6)
         s1.material.diffuse = 0.7
         s1.material.specular = 0.2

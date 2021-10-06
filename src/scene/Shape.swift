@@ -7,16 +7,17 @@
 
 import Foundation
 
+/// Every object in the world which should be rendered to the screen need to adopt the Shape protocol
 protocol Shape: IdentifiableObject {
     var uniqueId: UUID { get }
     
     var transform: Matrix4 {get set}
     var material: Material {get set}
     
-    /// Returns intersections of ray with Shape. To be implemented by every concrete shape; assumes ray is transformed to local coordiantes. Use intersect() with Ray in world coordiantes.
+    /// Returns intersections of ray with Shape. To be implemented by every concrete shape; assumes ray is transformed to local coordiantes. Use intersect() when you have a Ray in world coordiantes.
     func localIntersect(withRay ray: Ray) -> [Intersection]
     
-    /// Returns the (normalized) normal vector at given point. Point is assumed to be in local coordinates. Use normal() with point in world coordincates.
+    /// Returns the (normalized) normal vector at given point. Point is assumed to be in local coordinates. Use normalVec() when you have a  point in world coordincates.
     func localNormal(atPoint point: Tuple) -> Tuple
 }
 

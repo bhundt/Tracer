@@ -79,8 +79,10 @@ extension Array where Element == Intersection {
     
     /// Finds the nearest hit from the ray. Nearest means smallest, non-negative t-value
     func hit() -> Intersection? {
-        let hits = self.sorted().filter({ elem in elem.t >= 0.0 })
-        return hits.first
+        let hits = self.filter({ elem in elem.t >= 0.0 })
+        return hits.min(by: { (a,b) -> Bool in
+            return a.t < b.t
+        })
     }
 
 }

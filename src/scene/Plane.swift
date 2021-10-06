@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Plane: Shape, Equatable {
+struct Plane: Shape, Equatable {
     private var _id: UUID = UUID()
     var uniqueId: UUID { get{ return _id } }
     

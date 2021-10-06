@@ -46,7 +46,7 @@ class WorldTest: XCTestCase {
         let ray = Ray(origin: Tuple.makePoint(x: 0, y: 0, z: -5), direction: Tuple.makeVector(x: 0, y: 0, z: 1))
         
         //let xs = ray.intersect(world: w)
-        let xs = Collider.intersect(ray: ray, withWorld: w)
+        let xs = w.intersect(withRay: ray)
         
         XCTAssertEqual(xs.count, 4)
         XCTAssertEqual(xs[0].t, 4.0)

@@ -7,8 +7,8 @@
 
 import Foundation
 
-class Sphere: Shape, IdentifiableObject, Equatable {
-    private var _id: UUID
+struct Sphere: Shape, IdentifiableObject, Equatable {
+    private var _id: UUID = UUID()
     var uniqueId: UUID { get{ return _id } }
     
     private var _trafo: Matrix4 = Matrix4.makeIdentity()
@@ -24,11 +24,9 @@ class Sphere: Shape, IdentifiableObject, Equatable {
     }
     
     init() {
-        _id = UUID()
     }
     
     init(trafo: Matrix4) {
-        _id = UUID()
         transform = trafo
     }
     
